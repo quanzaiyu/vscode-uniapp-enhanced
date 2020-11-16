@@ -1,0 +1,219 @@
+{
+  "#ifdef": {
+    "prefix": "ifdef",
+    "body": [
+      "<!-- #ifdef ${1|APP-PLUS,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|} -->",
+      "$0",
+      "<!-- #endif -->"
+    ],
+    "scope": "vue-html"
+  },
+  "#ifndef": {
+    "prefix": "ifndef",
+    "body": [
+      "<!-- #ifndef ${1|APP-PLUS,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|} -->",
+      "$0",
+      "<!-- #endif -->"
+    ],
+    "scope": "vue-html"
+  },
+  "view": {
+    "prefix": "view",
+    "body": "<view>$0</view>",
+    "description": "view"
+  },
+  "text": {
+    "prefix": "text",
+    "body": "<text>$0</text>",
+    "description": "text"
+  },
+  "icon": {
+    "prefix": "icon",
+    "body": "<icon type=\"$1\" size=\"$2\" color=\"$3\" />",
+    "description": "icon"
+  },
+  "scroll-view": {
+    "prefix": "scroll-view",
+    "body": "<scroll-view scroll-${1:x}=\"$2\">$0</scroll-view>",
+    "description": "scroll-view"
+  },
+  "swiper": {
+    "prefix": "swiper",
+    "body": [
+      "<swiper class=\"swiper\" :indicator-dots=\"$1\" :autoplay=\"${2:true}\" :interval=\"$3\" :duration=\"$4\">",
+      "\t<swiper-item>",
+      "\t\t<view class=\"swiper-item uni-bg-red\">$0</view>",
+      "\t</swiper-item>",
+      "</swiper>"
+    ],
+    "description": "swiper"
+  },
+  "movable-area": {
+    "prefix": "movable-area",
+    "body": [
+      "<movable-area>",
+      "\t<movable-view :x=\"${1:0}\" :y=\"${2:0}\" direction=\"all\" @change=\"${3:changeEvent}\">$0</movable-view>",
+      "</movable-area>"
+    ],
+    "description": "movable-area"
+  },
+  "movable-view": {
+    "prefix": "movable-view",
+    "body": [
+      "<movable-view :x=\"${1:0}\" :y=\"${2:0}\" direction=\"all\" @change=\"${3:changeEvent}\">$0</movable-view>",
+    ],
+    "description": "movable-view"
+  },
+  "cover-view": {
+    "prefix": "cover-view",
+    "body": [
+      "<cover-view>$0</cover-view>"
+    ],
+    "description": "cover-view"
+  },
+  "cover-image": {
+    "prefix": "cover-image",
+    "body": [
+      "<cover-image src=\"$1\"></cover-image>"
+    ],
+    "description": "cover-image"
+  },
+  "rich-text": {
+    "prefix": "rich-text",
+    "body": "<rich-text :nodes=\"$1\"></rich-text>",
+    "description": "rich-text"
+  },
+  "textarea": {
+    "prefix": "textarea",
+    "body": "<textarea placeholder=\"${1:placeholder}\" />",
+    "description": "textarea"
+  },
+  "progress": {
+    "prefix": "progress",
+    "body": "<progress percent=\"$1\" backgroundColor=\"$2\" stroke-width=\"${3:6}\" ${4:active} ${5:show-info} />",
+    "description": "progress"
+  },
+  "label": {
+    "prefix": "label",
+    "body": "<label class=\"uni-list-cell uni-list-cell-pd\" v-for=\"($1{:item}, index) in ${2:items}\" :key=\"index\">",
+    "description": "label"
+  },
+  "button": {
+    "prefix": "button",
+    "body": "<button type=\"${1:default}\" size=\"${2:defaultSize}\" loading=\"${3:loading}\" plain=\"${4:plain}}\" disabled=\"${5:disabled}\" :tap=\"${6:defaultTap}\" hover-class=\"${7:other-button-hover}\">$0</button>",
+    "description": "button"
+  },
+  "editor": {
+    "prefix": "editor",
+    "body": " <editor :placeholder=\"$1placeholder\" @ready=\"${2:onEditorReady}\"></editor>",
+    "description": "editor"
+  },
+  "checkbox-group": {
+    "prefix": "checkbox-group",
+    "body": [
+      "<checkbox-group>",
+      "\t<label>",
+      "\t\t<checkbox value=\"$0\" />",
+      "\t</label>",
+      "</checkbox-group>"
+    ],
+    "description": "checkbox-group"
+  },
+  "radio-group": {
+    "prefix": "radio-group",
+    "body": [
+      "<radio-group>",
+      "\t<label>",
+      "\t\t<radio value=\"$0\" />",
+      "\t</label>",
+      "</radio-group>"
+    ],
+    "description": "radio-group"
+  },
+  "form": {
+    "prefix": "form",
+    "body": "<form @submit=\"$1\" @reset=\"$2\">$0</form>",
+    "description": "form"
+  },
+  "input": {
+    "prefix": "input",
+    "body": "<input type=\"$1\" placeholder=\"$2\" ${3:password} />",
+    "description": "input"
+  },
+  "picker-view":{
+    "prefix": "picker-view",
+    "body": [
+      "<picker-view v-if=\"visible\" :indicator-style=\"$1indicatorStyle\" :value=\"$2value\" @change=\"$1\">",
+      "\t<picker-view-column>",
+      "\t\t<view class=\"$2\" v-for=\"(${3:item}, index) in ${4:items}\" :key=\"index\">{{$5}}}</view>",
+      "\t</picker-view-column>",
+      "</picker-view>"
+    ],
+    "description": "picker-view"
+  },
+  "picker-time": {
+    "prefix": "picker:time",
+    "body": [
+      "<picker mode=\"time\" start=\"${1:start}\" end=\"${2:end}\">$0</picker>"
+    ],
+    "description": "time picker"
+  },
+  "picker-date": {
+    "prefix": "picker:date",
+    "body": [
+      "<picker mode=\"date\" start=\"${1:start}\" end=\"${2:end}\">$0</picker>"
+    ],
+    "description": "date picker"
+  },
+  "slider": {
+    "prefix": "slider",
+    "body": "<slider min=\"$1\" max=\"$2\" step=\"$3\" />",
+    "description": "slider"
+  },
+  "switch": {
+    "prefix": "switch",
+    "body": "<switch checked=\"${1:false}\" />",
+    "description": "switch"
+  },
+  "actoin-sheet": {
+    "prefix": "actoin-sheet",
+    "body": [
+      "<action-sheet>",
+      "\t<block wx:for=\"{{${1:actionSheetItems}}}\">",
+      "\t\t<action-sheet-item class=\"item\" data-name=\"{{${2:item}}}\" />{{${2:item}}}</action-sheet-item>",
+      "\t</block>",
+      "</action-sheet>"
+    ],
+    "description": "actoin-sheet"
+  },
+  "modal": {
+    "prefix": "modal",
+    "body": "<modal title=\"$1\" confirm-text=\"$2\" cancel-text=\"$3\" bindconfirm=\"$4\" bindcancel=\"$5\">$0</modal>",
+    "description": "modal"
+  },
+  "toast": {
+    "prefix": "toast",
+    "body": "<toast>$0</toast>",
+    "description": "toast"
+  },
+  "loading": {
+    "prefix": "loading",
+    "body": "<loading>$0</loading>",
+    "description": "loading"
+  },
+  "navigator": {
+    "prefix": "navigator",
+    "body": "<navigator url=\"$1\" ${2:redirect} hover-class=\"${3:className}\">$0</navigator>",
+    "description": "navigator"
+  },
+  "image": {
+    "prefix": "image",
+    "body": "<image src=\"$1\" mode=\"$2\" />",
+    "description": "image"
+  },
+  "map": {
+    "prefix": "map",
+    "body": "<map longitude=\"$1\" latitude=\"$2\"></map>",
+    "description": "map"
+  }
+}

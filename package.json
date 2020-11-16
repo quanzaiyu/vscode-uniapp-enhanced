@@ -1,0 +1,116 @@
+{
+  "name": "vscode-uniapp-enhanced",
+  "displayName": "Uniapp Enhanced",
+  "description": "Uniapp snippets for VSCode and verify schemas",
+  "publisher": "quanzaiyu",
+  "version": "1.0.0",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quanzaiyu/vscode-uniapp-enhanced.git"
+  },
+  "tags": [
+    "vscode",
+    "uniapp",
+    "snippets"
+  ],
+  "keywords": [
+    "Vue",
+    "Uniapp",
+    "Snippets",
+    "Vue.js",
+    "Vue Snippets",
+    "Uniapp Snippets"
+  ],
+  "categories": [
+    "Snippets",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/pages.json",
+    "workspaceContains:**/manifest.json"
+  ],
+  "main": "./src/main.js",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./src/snippets/js.code-snippets"
+      },
+      {
+        "language": "typescript",
+        "path": "./src/snippets/js.code-snippets"
+      },
+      {
+        "language": "css",
+        "path": "./src/snippets/css.code-snippets"
+      },
+      {
+        "language": "vue",
+        "path": "./src/snippets/vue-html.code-snippets"
+      },
+      {
+        "language": "vue-html",
+        "path": "./src/snippets/vue-html.code-snippets"
+      },
+      {
+        "language": "pug",
+        "path": "./src/snippets/pug.code-snippets"
+      },
+      {
+        "language": "jade",
+        "path": "./src/snippets/pug.code-snippets"
+      },
+      {
+        "language": "sass",
+        "path": "./src/snippets/styles.code-snippets"
+      },
+      {
+        "language": "scss",
+        "path": "./src/snippets/styles.code-snippets"
+      },
+      {
+        "language": "less",
+        "path": "./src/snippets/styles.code-snippets"
+      },
+      {
+        "language": "stylus",
+        "path": "./src/snippets/styles.code-snippets"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "pages.json",
+        "url": "./src/schemas/pages.schema.json"
+      },
+      {
+        "fileMatch": "manifest.json",
+        "url": "./src/schemas/manifest.schema.json"
+      }
+    ]
+  },
+  "scripts": {
+    "push": "git push origin master && git push coding master",
+    "build": "vsce package -o vscode-uniapp-enhanced.vsix",
+    "ext": "yarn build && code --install-extension vscode-uniapp-enhanced.vsix",
+    "publish": "vsce publish",
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.51.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.9.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "typescript": "^4.0.2",
+    "vscode-test": "^1.4.0"
+  }
+}

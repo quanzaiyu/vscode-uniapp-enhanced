@@ -1,0 +1,20 @@
+{
+  "#ifdef": {
+    "prefix": "ifdef",
+    "body": [
+      "// #ifdef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
+      "$0",
+      "// #endif"
+    ],
+    "scope": "typescript,javascript"
+  },
+  "#ifndef": {
+    "prefix": "ifndef",
+    "body": [
+      "// #ifndef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
+      "$0",
+      "// #endif"
+    ],
+    "scope": "typescript,javascript"
+  }
+}
