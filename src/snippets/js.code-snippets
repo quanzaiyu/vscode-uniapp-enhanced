@@ -18,39 +18,270 @@
     "scope": "typescript,javascript"
   },
 
-
+  "uni.request": {
+    "prefix": "uni.request",
+    "body": [
+      "uni.request({",
+      "\turl: '$1',",
+      "\tmethod: '${2:GET}',",
+      "\tdata: {$3},",
+      "\tsuccess: res => {$0},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.request"
+  },
+  "uni.getLocation": {
+    "prefix": "uni.getLocation",
+    "body": [
+      "uni.getLocation({",
+      "\ttype: '${1:wgs84}',",
+      "\tsuccess: res => {$0}",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getLocation"
+  },
+  "uni.showToast": {
+    "prefix": "uni.showToast",
+    "body": [
+      "uni.showToast({",
+      "\ttitle: '$1'",
+      "\ticon: '${2:none}'",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showToast"
+  },
+  "uni.showLoading": {
+    "prefix": "uni.showLoading",
+    "body": [
+      "uni.showLoading({",
+      "\ttitle: '$1',",
+      "\tmask: ${2:false}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showLoading"
+  },
+  "uni.hideLoading": {
+    "prefix": "uni.hideLoading()",
+    "body": [
+      "uni.hideLoading()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.hideLoading"
+  },
+  "uni.showModal": {
+    "prefix": "uni.showModal",
+    "body": [
+        "uni.showModal({",
+        "\ttitle: '$1',",
+        "\tcontent: '$2',",
+        "\tshowCancel: ${3:false},",
+        "\tcancelText: '$4',",
+        "\tconfirmText: '$5',",
+        "\tsuccess: res => {$0},",
+        "\tfail: () => {},",
+        "\tcomplete: () => {}",
+        "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showModal"
+  },
+  "uni.showModal:alert": {
+    "prefix": "uni.showModal:alert",
+    "body": [
+      "uni.showModal({",
+      "\tcontent: '$1',",
+      "\tshowCancel: false",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showModal:alert"
+  },
+  "uni.showModal:confirm": {
+    "prefix": "uni.showModal:confirm",
+    "body": [
+      "uni.showModal({",
+      "\tcontent: '$1',",
+      "\tsuccess: function (res) {",
+      "\t\tif (res.confirm) {",
+      "\t\t\t$2",
+      "\t\t} else if (res.cancel) {",
+      "\t\t\t$3",
+      "\t\t}",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showModal:confirm"
+  },
+  "uni.showActionSheet": {
+    "prefix": "uni.showActionSheet",
+    "body": [
+      "uni.showActionSheet({",
+      "\titemList: $1,",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.showActionSheet"
+  },
+  "uni.navigateTo": {
+    "prefix": "uni.navigateTo",
+    "body": [
+      "uni.navigateTo({ url: '$1' })"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.navigateTo"
+  },
+  "uni.navigateTo:callback": {
+    "prefix": "uni.navigateTo:callback",
+    "body": [
+      "uni.navigateTo({",
+      "\turl: '$1',",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.navigateTo:callback"
+  },
+  "uni.redirectTo": {
+    "prefix": "uni.redirectTo",
+    "body": [
+      "uni.redirectTo({ url: '$1' })"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.redirectTo"
+  },
+  "uni.redirectTo:callback": {
+    "prefix": "uni.redirectTo:callback",
+    "body": [
+      "uni.redirectTo({",
+      "\turl: '$1',",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.redirectTo:callback"
+  },
+  "uni.navigateBack": {
+    "prefix": "uni.navigateBack",
+    "body": [
+      "uni.navigateBack()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.navigateBack"
+  },
+  "uni.navigateBack:delta": {
+    "prefix": "uni.navigateBack:delta",
+    "body": [
+      "uni.navigateBack({ delta: ${1:1} })"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.navigateBack:delta"
+  },
+  "uni.startPullDownRefresh": {
+    "prefix": "uni.startPullDownRefresh",
+    "body": [
+      "uni.startPullDownRefresh({",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.startPullDownRefresh"
+  },
+  "uni.stopPullDownRefresh": {
+    "prefix": "uni.stopPullDownRefresh",
+    "body": [
+      "uni.stopPullDownRefresh()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.stopPullDownRefresh"
+  },
+  "uni.login": {
+    "prefix": "uni.login",
+    "body": [
+      "uni.login({",
+      "\tprovider: '$1',",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "});"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.login"
+  },
+  "uni.share": {
+    "prefix": "uni.share",
+    "body": [
+        "uni.share({",
+        "\tprovider: '$1',",
+        "\ttype: 0$2,",
+        "\ttitle: '$3',",
+        "\thref: '$4',",
+        "\timageUrl: '$5',",
+        "\tsuccess: res => {},",
+        "\tfail: () => {},",
+        "\tcomplete: () => {}",
+        "});"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.share"
+  },
+  "uni.requestPayment": {
+    "prefix": "uni.requestPayment",
+    "body": [
+      "uni.requestPayment({",
+      "\tprovider: '$1',",
+      "\torderInfo: '$2',",
+      "\tsuccess: res => {$0},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "});"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.requestPayment"
+  },
   "uniapp.base64ToArrayBuffer": {
     "prefix": "uni.base64ToArrayBuffer",
     "body": [
       "uni.base64ToArrayBuffer(${1:base64})"
     ],
-    "description": "uniapp.base64ToArrayBuffer"
+    "scope": "typescript,javascript",
+    "description": "uni.base64ToArrayBuffer"
   },
   "uniapp.arrayBufferToBase64": {
     "prefix": "uni.arrayBufferToBase64",
     "body": [
       "uni.arrayBufferToBase64(${1:arrayBuffer})"
     ],
-    "description": "uniapp.arrayBufferToBase64"
+    "scope": "typescript,javascript",
+    "description": "uni.arrayBufferToBase64"
   },
-  "uniapp.request": {
-    "prefix": "uni.request",
+  "uni globalData": {
+    "prefix": "uni:globalData",
     "body": [
-      "uni.request({",
-      "\turl: '$1'",
-      "\tdata: {",
-      "\t\t$2",
-      "\t},",
-      "\theader: {",
-      "\t\t$3",
-      "\t},",
-      "\tsuccess: (res) => {",
-      "\t\t$4",
-      "\t}",
-      "});"
+      "getApp().globalData."
     ],
-    "description": "uniapp.request"
+    "scope": "typescript,javascript",
+    "description": "uni:globalData"
   },
+
+
 // "uniapp-选择图片": {
 //     "prefix": "uni.chooseImage()",
 //     "body": [
@@ -335,19 +566,6 @@
 //         "uni.clearStorage();"
 //     ],
 //     "description": "uniapp-同步清理本地数据缓存"
-// },
-// "uniapp-获取当前的地理位置": {
-//     "prefix": "uni.getLocation()",
-//     "body": [
-//         "uni.getLocation({",
-//             "\ttype: 'wgs84',",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log('当前位置的经度：' + res.longitude);",
-//                 "\t\tconsole.log('当前位置的纬度：' + res.latitude);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取当前的地理位置"
 // },
 // "uniapp-打开地图选择位置": {
 //     "prefix": "uni.chooseLocation()",
@@ -652,38 +870,12 @@
 //     ],
 //     "description": "uniapp-监听陀螺仪数据变化事件"
 // },
-// "uniapp-显示消息提示框": {
-//     "prefix": "uni.showToast()",
-//     "body": [
-//         "uni.showToast({",
-//             "\ttitle: '标题',",
-//             "\tduration: 2000",
-//         "});"
-//     ],
-//     "description": "uniapp-显示消息提示框"
-// },
 // "uniapp-隐藏消息提示框": {
 //     "prefix": "uni.hideToast()",
 //     "body": [
 //         "uni.hideToast();"
 //     ],
 //     "description": "uniapp-隐藏消息提示框"
-// },
-// "uniapp-显示 loading 提示框": {
-//     "prefix": "uni.showLoading()",
-//     "body": [
-//         "uni.showLoading({",
-//             "\ttitle: '加载中'$0",
-//         "});"
-//     ],
-//     "description": "uniapp-显示 loading 提示框"
-// },
-// "uniapp-隐藏 loading 提示框": {
-//     "prefix": "uni.hideLoading()",
-//     "body": [
-//         "uni.hideLoading();"
-//     ],
-//     "description": "uniapp-隐藏 loading 提示框"
 // },
 // "uniapp-显示模态弹窗": {
 //     "prefix": "uni.showModal()",
