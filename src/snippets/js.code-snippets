@@ -33,19 +33,6 @@
     "scope": "typescript,javascript",
     "description": "uni.request"
   },
-  "uni.getLocation": {
-    "prefix": "uni.getLocation",
-    "body": [
-      "uni.getLocation({",
-      "\ttype: '${1:wgs84}',",
-      "\tsuccess: res => {$0}",
-      "\tfail: () => {},",
-      "\tcomplete: () => {}",
-      "})"
-    ],
-    "scope": "typescript,javascript",
-    "description": "uni.getLocation"
-  },
   "uni.showToast": {
     "prefix": "uni.showToast",
     "body": [
@@ -79,16 +66,16 @@
   "uni.showModal": {
     "prefix": "uni.showModal",
     "body": [
-        "uni.showModal({",
-        "\ttitle: '$1',",
-        "\tcontent: '$2',",
-        "\tshowCancel: ${3:false},",
-        "\tcancelText: '$4',",
-        "\tconfirmText: '$5',",
-        "\tsuccess: res => {$0},",
-        "\tfail: () => {},",
-        "\tcomplete: () => {}",
-        "})"
+      "uni.showModal({",
+      "\ttitle: '$1',",
+      "\tcontent: '$2',",
+      "\tshowCancel: ${3:false},",
+      "\tcancelText: '$4',",
+      "\tconfirmText: '$5',",
+      "\tsuccess: res => {$0},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
     ],
     "scope": "typescript,javascript",
     "description": "uni.showModal"
@@ -192,6 +179,26 @@
     "scope": "typescript,javascript",
     "description": "uni.navigateBack:delta"
   },
+  "uni.reLaunch": {
+    "prefix": "uni.reLaunch()",
+    "body": [
+      "uni.reLaunch({",
+      "\turl: '$0'",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.reLaunch"
+  },
+  "uni.switchTab": {
+    "prefix": "uni.switchTab()",
+    "body": [
+      "uni.switchTab({",
+      "\turl: '$0'",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.switchTab"
+  },
   "uni.startPullDownRefresh": {
     "prefix": "uni.startPullDownRefresh",
     "body": [
@@ -220,7 +227,7 @@
       "\tsuccess: res => {},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
-      "});"
+      "})"
     ],
     "scope": "typescript,javascript",
     "description": "uni.login"
@@ -228,16 +235,16 @@
   "uni.share": {
     "prefix": "uni.share",
     "body": [
-        "uni.share({",
-        "\tprovider: '$1',",
-        "\ttype: 0$2,",
-        "\ttitle: '$3',",
-        "\thref: '$4',",
-        "\timageUrl: '$5',",
-        "\tsuccess: res => {},",
-        "\tfail: () => {},",
-        "\tcomplete: () => {}",
-        "});"
+      "uni.share({",
+      "\tprovider: '$1',",
+      "\ttype: 0$2,",
+      "\ttitle: '$3',",
+      "\thref: '$4',",
+      "\timageUrl: '$5',",
+      "\tsuccess: res => {},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
     ],
     "scope": "typescript,javascript",
     "description": "uni.share"
@@ -251,7 +258,7 @@
       "\tsuccess: res => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
-      "});"
+      "})"
     ],
     "scope": "typescript,javascript",
     "description": "uni.requestPayment"
@@ -272,6 +279,58 @@
     "scope": "typescript,javascript",
     "description": "uni.arrayBufferToBase64"
   },
+  "uni.uploadFile": {
+    "prefix": "uni.uploadFile",
+    "body": [
+      "uni.uploadFile({",
+      "\turl: '$1',",
+      "\tfilePath: $2,",
+      "\tname: '$3',",
+      "\tformData: {$4}",
+      "\tsuccess: (res) => {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.uploadFile"
+  },
+  "uni.chooseImage": {
+    "prefix": "uni.chooseImage",
+    "body": [
+      "uni.chooseImage({",
+      "\tsuccess: (imageRes) => {",
+      "\t\tconst tempFilePaths = imageRes.tempFilePaths",
+      "\t\tuni.uploadFile({",
+      "\t\t\turl: '$1',",
+      "\t\t\tfilePath: tempFilePaths[0],",
+      "\t\t\tname: '$2',",
+      "\t\t\tformData: {$3},",
+      "\t\t\tsuccess: (res) => {",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t});",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.chooseImage"
+  },
+  "uni.downloadFile": {
+    "prefix": "uni.downloadFile",
+    "body": [
+      "uni.downloadFile({",
+      "\turl: '$1',",
+      "\tsuccess: (res) => {",
+      "\t\tif (res.statusCode === 200) {",
+      "\t\t\t$0",
+      "\t\t}",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.downloadFile"
+  },
+
   "uni globalData": {
     "prefix": "uni:globalData",
     "body": [
@@ -281,326 +340,236 @@
     "description": "uni:globalData"
   },
 
+  // socket
+  "uni.connectSocket": {
+    "prefix": "uni.connectSocket",
+    "body": [
+      "uni.connectSocket({",
+      "\turl: 'wss://$1',",
+      "\tdata() {",
+      "\t\treturn {$2}",
+      "\t},",
+      "\theader: {",
+      "\t\t'content-type': 'application/json'",
+      "\t},",
+      "\tmethod: 'GET'",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.connectSocket"
+  },
+  "uni.onSocketOpen": {
+    "prefix": "uni.onSocketOpen",
+    "body": [
+      "uni.onSocketOpen(function (res) {",
+      "\tconsole.log('WebSocket opened')",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.onSocketOpen"
+  },
+  "uni.onSocketError": {
+    "prefix": "uni.onSocketError()",
+    "body": [
+      "uni.onSocketError(function (res) {",
+      "\tconsole.log('WebSocket error')",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.onSocketError"
+  },
+  "uni.onSocketMessage": {
+    "prefix": "uni.onSocketMessage",
+    "body": [
+      "uni.onSocketMessage(function (res) {",
+      "\tconsole.log('收到服务器内容：' + res.data)",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.onSocketMessage"
+  },
+  "uni.sendSocketMessage": {
+    "prefix": "uni.sendSocketMessage()",
+    "body": [
+      "uni.sendSocketMessage({",
+      "\tdata: ${0: msg}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.sendSocketMessage"
+  },
+  "uni.closeSocket": {
+    "prefix": "uni.closeSocket",
+    "body": [
+      "uni.closeSocket()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.closeSocket"
+  },
+  "uni.onSocketClose": {
+    "prefix": "uni.onSocketClose",
+    "body": [
+      "uni.onSocketClose(function (res) {",
+      "\tconsole.log('WebSocket closed')",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.onSocketClose"
+  },
 
-// "uniapp-选择图片": {
-//     "prefix": "uni.chooseImage()",
-//     "body": [
-//         "uni.chooseImage({",
-//         "\tsuccess: (chooseImageRes) => {",
-//         "\t\tconst tempFilePaths = chooseImageRes.tempFilePaths;",
-//         "\t\tuni.uploadFile({",
-//         "\t\t\turl: 'https://www.example.com/upload', //仅为示例，非真实的接口地址",
-//         "\t\t\tfilePath: tempFilePaths[0],",
-//         "\t\t\tname: 'file',",
-//         "\t\t\tformData: {",
-//         "\t\t\t\t'user': 'test'",
-//         "\t\t\t},",
-//         "\t\t\tsuccess: (uploadFileRes) => {",
-//         "\t\t\t\tconsole.log(uploadFileRes.data);",
-//         "\t\t\t}",
-//         "\t\t});",
-//         "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-选择图片"
-// },
-// "uniapp-上传文件": {
-//     "prefix": "uni.uploadFile()",
-//     "body": [
-//         "uni.uploadFile({",
-//         "\turl: 'https://www.example.com/upload', //仅为示例，非真实的接口地址",
-//         "\tfilePath: tempFilePaths[0],",
-//         "\tname: 'file',",
-//         "\tformData: {",
-//         "\t\t'user': 'test'",
-//         "\t},",
-//         "\tsuccess: (uploadFileRes) => {",
-//         "\t\tconsole.log(uploadFileRes.data);",
-//         "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-上传文件"
-// },
-// "uniapp-下载文件": {
-//     "prefix": "uni.downloadFile()",
-//     "body": [
-//         "uni.downloadFile({",
-//         "\turl: 'https://www.example.com/file/test', //仅为示例，并非真实的资源",
-//         "\tsuccess: (res) => {",
-//         "\t\tif (res.statusCode === 200) {",
-//         "\t\t\tconsole.log('下载成功');",
-//         "\t\t}",
-//         "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-下载文件"
-// },
-// "uniapp-创建一个 WebSocket 连接": {
-//     "prefix": "uni.connectSocket()",
-//     "body": [
-//         "uni.downloadFile({",
-//         "\turl: 'https://www.example.com/file/test', //仅为示例，并非真实的资源",
-//         "\tsuccess: (res) => {",
-//         "\t\tif (res.statusCode === 200) {",
-//         "\t\t\tconsole.log('下载成功');",
-//         "\t\t}",
-//         "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-创建一个 WebSocket 连接"
-// },
-// "uniapp-创建一个 WebSocket 连接": {
-//     "prefix": "uni.connectSocket()",
-//     "body": [
-//         "uni.connectSocket({",
-//         "\turl: 'wss://www.example.com/socket',",
-//         "\tdata() {",
-//         "\t\treturn {",
-//         "\t\t\tx: '',",
-//         "\t\t\ty: ''",
-//         "\t\t};",
-//         "\t},",
-//         "\theader: {",
-//         "\t\t'content-type': 'application/json'",
-//         "\t},",
-//         "\tprotocols: ['protocol1'],",
-//         "\tmethod: 'GET'",
-//         "});$0"
-//     ],
-//     "description": "uniapp-创建一个 WebSocket 连接"
-// },
-// "uniapp-监听WebSocket连接打开事件": {
-//     "prefix": "uni.onSocketOpen()",
-//     "body": [
-//         "uni.onSocketOpen(function (res) {",
-//         "\tconsole.log('WebSocket连接已打开！');",
-//         "});$0"
-//     ],
-//     "description": "uniapp-监听WebSocket连接打开事件"
-// },
-// "uniapp-监听WebSocket错误": {
-//     "prefix": "uni.onSocketError()",
-//     "body": [
-//         "uni.onSocketError(function (res) {",
-//         "\tconsole.log('WebSocket连接已打开！');",
-//         "});$0"
-//     ],
-//     "description": "uniapp-监听WebSocket错误"
-// },
-// "uniapp-监听WebSocket接受到服务器的消息事件": {
-//     "prefix": "uni.onSocketMessage()",
-//     "body": [
-//         "uni.onSocketMessage(function (res) {",
-//         "\tconsole.log('收到服务器内容：' + res.data);",
-//         "});$0"
-//     ],
-//     "description": "uniapp-监听WebSocket接受到服务器的消息事件"
-// },
-// "uniapp-WebSocket发送数据": {
-//     "prefix": "uni.sendSocketMessage()",
-//     "body": [
-//         "uni.sendSocketMessage({",
-//         "\tdata: msg$0",
-//         "});"
-//     ],
-//     "description": "uniapp-WebSocket发送数据"
-// },
-// "uniapp-关闭 WebSocket 连接": {
-//     "prefix": "uni.closeSocket()",
-//     "body": [
-//         "uni.closeSocket()"
-//     ],
-//     "description": "uniapp-关闭 WebSocket 连接"
-// },
-// "uniapp-监听WebSocket关闭": {
-//     "prefix": "uni.onSocketClose()",
-//     "body": [
-//         "uni.onSocketClose(function (res) {",
-//             "\tconsole.log('WebSocket 已关闭！');",
-//         "});$0"
-//     ],
-//     "description": "uniapp-监听WebSocket关闭"
-// },
-// "uniapp-跳转到应用内的某个页面": {
-//     "prefix": "uni.navigateTo()",
-//     "body": [
-//         "uni.navigateTo({",
-//             "\t url: 'test?id=1&name=uniapp$0';",
-//         "});$0"
-//     ],
-//     "description": "uniapp-跳转到应用内的某个页面"
-// },
-// "uniapp-关闭当前页面跳转到应用内的某个页面": {
-//     "prefix": "uni.redirectTo()",
-//     "body": [
-//         "uni.redirectTo({",
-//             "\t url: 'test?id=1&name=uniapp$0';",
-//         "});$0"
-//     ],
-//     "description": "uniapp-关闭当前页面跳转到应用内的某个页面"
-// },
-// "uniapp-关闭所有页面，打开到应用内的某个页面": {
-//     "prefix": "uni.reLaunch()",
-//     "body": [
-//         "uni.reLaunch({",
-//             "\t url: 'test?id=1&name=uniapp$0';",
-//         "});$0"
-//     ],
-//     "description": "uniapp-关闭所有页面，打开到应用内的某个页面"
-// },
-// "uniapp-跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面": {
-//     "prefix": "uni.switchTab()",
-//     "body": [
-//         "uni.switchTab({",
-//             "\t url: '/pages/index/index$0';",
-//         "});$0"
-//     ],
-//     "description": "uniapp-跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面"
-// },
-// "uniapp-关闭当前页面，返回上一页面或多级页面": {
-//     "prefix": "uni.navigateBack()",
-//     "body": [
-//         "uni.navigateBack({",
-//             "\t delta: 2$0",
-//         "});"
-//     ],
-//     "description": "uniapp-关闭当前页面，返回上一页面或多级页面"
-// },
-// "uniapp-关闭当前页面，返回上一页面或多级页面": {
-//     "prefix": "uni.navigateBack()",
-//     "body": [
-//         "uni.navigateBack({",
-//             "\t delta: 2$0",
-//         "});"
-//     ],
-//     "description": "uniapp-关闭当前页面，返回上一页面或多级页面"
-// },
-// "uniapp-将数据存储在本地缓存中指定的 key 中,异步接口": {
-//     "prefix": "uni.setStorage()",
-//     "body": [
-//         "uni.setStorage({",
-//             "\tkey: 'storage_key',",
-//             "\tdata: 'hello',",
-//             "\tsuccess: function () {",
-//                 "\t\tconsole.log('success')$0;",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-将数据存储在本地缓存中指定的 key 中"
-// },
-// "uniapp-将 data 存储在本地缓存中指定的 key 中,同步接口": {
-//     "prefix": "uni.setStorageSync()",
-//     "body": [
-//         "uni.setStorageSync('$0storage_key', '$1hello')"
-//     ],
-//     "description": "uniapp-将 data 存储在本地缓存中指定的 key 中"
-// },
-// "uniapp-从本地缓存中异步获取指定 key 对应的内容": {
-//     "prefix": "uni.getStorage()",
-//     "body": [
-//         "uni.getStorage({",
-//             "\tkey: 'storage_key',",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log(res.data)$0;",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-从本地缓存中异步获取指定 key 对应的内容"
-// },
-// "uniapp-从本地缓存中同步获取指定 key 对应的内容": {
-//     "prefix": "uni.getStorageSync()",
-//     "body": [
-//         "uni.getStorageSync('storage_key$0')"
-//     ],
-//     "description": "uniapp-从本地缓存中同步获取指定 key 对应的内容"
-// },
-// "uniapp-异步获取当前 storage 的相关信息": {
-//     "prefix": "uni.getStorageInfo()",
-//     "body": [
-//         "uni.getStorageInfo({",
-//             "\tsuccess: function (res) {",
-//                 "\tconsole.log(res.keys);",
-//                 "\tconsole.log(res.currentSize);",
-//                 "\tconsole.log(res.limitSize);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-异步获取当前 storage 的相关信息"
-// },
-// "uniapp-同步获取当前 storage 的相关信息": {
-//     "prefix": "uni.getStorageInfoSync()",
-//     "body": [
-//         "uni.getStorageInfoSync()"
-//     ],
-//     "description": "uniapp-同步获取当前 storage 的相关信息"
-// },
-// "uniapp-从本地缓存中异步移除指定 key": {
-//     "prefix": "uni.removeStorage()",
-//     "body": [
-//         "uni.removeStorage({",
-//             "\tkey: 'storage_key',",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log('success');",
-//             "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-从本地缓存中异步移除指定 key"
-// },
-// "uniapp-从本地缓存中同步移除指定 key。": {
-//     "prefix": "uni.removeStorageSync()",
-//     "body": [
-//         "uni.removeStorageSync('storage_key');"
-//     ],
-//     "description": "uniapp-从本地缓存中同步移除指定 key。"
-// },
-// "uniapp-清理本地数据缓存": {
-//     "prefix": "uni.clearStorage()",
-//     "body": [
-//         "uni.clearStorage();"
-//     ],
-//     "description": "uniapp-清理本地数据缓存"
-// },
-// "uniapp-同步清理本地数据缓存": {
-//     "prefix": "uni.clearStorage()",
-//     "body": [
-//         "uni.clearStorage();"
-//     ],
-//     "description": "uniapp-同步清理本地数据缓存"
-// },
-// "uniapp-打开地图选择位置": {
-//     "prefix": "uni.chooseLocation()",
-//     "body": [
-//         "uni.chooseLocation({",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log('位置名称：' + res.name);",
-//                 "\t\tconsole.log('详细地址：' + res.address);",
-//                 "\t\tconsole.log('纬度：' + res.latitude);",
-//                 "\t\tconsole.log('经度：' + res.longitude);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-打开地图选择位置"
-// },
-// "uniapp-使用应用内置地图查看位置": {
-//     "prefix": "uni.getLocation()",
-//     "body": [
-//         "uni.getLocation({",
-//             "\ttype: 'gcj02', //返回可以用于uni.openLocation的经纬度",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconst latitude = res.latitude;",
-//                 "\t\tconst longitude = res.longitude;",
-//                 "\t\tuni.openLocation({",
-//                     "\t\t\tlatitude: latitude,",
-//                     "\t\t\tlongitude: longitude,",
-//                     "\t\t\tsuccess: function () {",
-//                         "\t\t\t\tconsole.log('success');",
-//                     "\t\t\t}",
-//                 "\t\t});",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-使用应用内置地图查看位置"
-// },
+  // storage
+  "uni.setStorage": {
+    "prefix": "uni.setStorage",
+    "body": [
+      "uni.setStorage({",
+      "\tkey: '$1',",
+      "\tdata: '$2',",
+      "\tsuccess: function () {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.setStorage"
+  },
+  "uni.setStorageSync": {
+    "prefix": "uni.setStorageSync",
+    "body": [
+      "uni.setStorageSync('$1', '$2')"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.setStorageSync"
+  },
+  "uni.getStorage": {
+    "prefix": "uni.getStorage",
+    "body": [
+      "uni.getStorage({",
+      "\tkey: '$1',",
+      "\tsuccess: function (res) {",
+      "\t\tconsole.log(res.data)",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getStorage"
+  },
+  "uni.getStorageSync": {
+    "prefix": "uni.getStorageSync",
+    "body": [
+      "uni.getStorageSync('$0')"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getStorageSync"
+  },
+  "uni.getStorageInfo": {
+    "prefix": "uni.getStorageInfo",
+    "body": [
+      "uni.getStorageInfo({",
+      "\tsuccess: function (res) {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getStorageInfo"
+  },
+  "uni.getStorageInfoSync": {
+    "prefix": "uni.getStorageInfoSync",
+    "body": [
+      "uni.getStorageInfoSync()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getStorageInfoSync"
+  },
+  "uni.removeStorage": {
+    "prefix": "uni.removeStorage",
+    "body": [
+      "uni.removeStorage({",
+      "\tkey: '$1',",
+      "\tsuccess: function (res) {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.removeStorage"
+  },
+  "uni.removeStorageSync": {
+    "prefix": "uni.removeStorageSync",
+    "body": [
+      "uni.removeStorageSync('$0')"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.removeStorageSync"
+  },
+  "uni.clearStorage": {
+    "prefix": "uni.clearStorage",
+    "body": [
+      "uni.clearStorage()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.clearStorage"
+  },
+  "uni.clearStorageSync": {
+    "prefix": "uni.clearStorageSync",
+    "body": [
+      "uni.clearStorageSync()"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.clearStorageSync"
+  },
+
+  // location
+  "uni.chooseLocation": {
+    "prefix": "uni.chooseLocation",
+    "body": [
+      "uni.chooseLocation({",
+      "\tsuccess: function (res) {",
+      "\t\tconsole.log('位置名称：' + res.name)",
+      "\t\tconsole.log('详细地址：' + res.address)",
+      "\t\tconsole.log('纬度：' + res.latitude)",
+      "\t\tconsole.log('经度：' + res.longitude)",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.chooseLocation"
+  },
+  "uni.getLocation": {
+    "prefix": "uni.getLocation",
+    "body": [
+      "uni.getLocation({",
+      "\ttype: '${1|wgs84,gcj02|}',",
+      "\tsuccess: res => {$0}",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.getLocation"
+  },
+  "uni.openLocation": {
+    "prefix": "uni.openLocation",
+    "body": [
+      "uni.getLocation({",
+      "\ttype: '${1|wgs84,gcj02|}',",
+      "\tsuccess: function (res) {",
+      "\t\tconst latitude = res.latitude",
+      "\t\tconst longitude = res.longitude",
+      "\t\tuni.openLocation({",
+      "\t\t\tlatitude: latitude,",
+      "\t\t\tlongitude: longitude,",
+      "\t\t\tsuccess: function () {",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.openLocation"
+  },
+
 // "uniapp-预览图片": {
 //     "prefix": "uni.previewImage()",
 //     "body": [
