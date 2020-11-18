@@ -1,12 +1,12 @@
 {
+  // 条件注释 comment
   "#ifdef": {
     "prefix": "ifdef",
     "body": [
       "// #ifdef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
       "$0",
       "// #endif"
-    ],
-    "scope": "typescript,javascript"
+    ]
   },
   "#ifndef": {
     "prefix": "ifndef",
@@ -14,25 +14,10 @@
       "// #ifndef ${1|APP-PLUS,APP-PLUS-NVUE,MP,MP-ALIPAY,MP-BAIDU,MP-WEIXIN,MP-QQ,H5|}",
       "$0",
       "// #endif"
-    ],
-    "scope": "typescript,javascript"
+    ]
   },
 
-  "uni.request": {
-    "prefix": "uni.request",
-    "body": [
-      "uni.request({",
-      "\turl: '$1',",
-      "\tmethod: '${2:GET}',",
-      "\tdata: {$3},",
-      "\tsuccess: res => {$0},",
-      "\tfail: () => {},",
-      "\tcomplete: () => {}",
-      "})"
-    ],
-    "scope": "typescript,javascript",
-    "description": "uni.request"
-  },
+  // 弹出层
   "uni.showToast": {
     "prefix": "uni.showToast",
     "body": [
@@ -41,8 +26,14 @@
       "\ticon: '${2:none}'",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showToast"
+  },
+  "uni.hideToast": {
+    "prefix": "uni.hideToast",
+    "body": [
+      "uni.hideToast()"
+    ],
+    "description": "uni.hideToast"
   },
   "uni.showLoading": {
     "prefix": "uni.showLoading",
@@ -52,15 +43,13 @@
       "\tmask: ${2:false}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showLoading"
   },
   "uni.hideLoading": {
-    "prefix": "uni.hideLoading()",
+    "prefix": "uni.hideLoading",
     "body": [
       "uni.hideLoading()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.hideLoading"
   },
   "uni.showModal": {
@@ -72,12 +61,11 @@
       "\tshowCancel: ${3:false},",
       "\tcancelText: '$4',",
       "\tconfirmText: '$5',",
-      "\tsuccess: res => {$0},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showModal"
   },
   "uni.showModal:alert": {
@@ -88,7 +76,6 @@
       "\tshowCancel: false",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showModal:alert"
   },
   "uni.showModal:confirm": {
@@ -96,7 +83,7 @@
     "body": [
       "uni.showModal({",
       "\tcontent: '$1',",
-      "\tsuccess: function (res) {",
+      "\tsuccess: (res) => {",
       "\t\tif (res.confirm) {",
       "\t\t\t$2",
       "\t\t} else if (res.cancel) {",
@@ -105,28 +92,45 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showModal:confirm"
   },
   "uni.showActionSheet": {
     "prefix": "uni.showActionSheet",
     "body": [
       "uni.showActionSheet({",
-      "\titemList: $1,",
-      "\tsuccess: res => {},",
+      "\titemList: [${1:'A', 'B', 'C'}],",
+      "\tsuccess: (res) => {",
+      "\t\tconsole.log('选中了第' + (res.tapIndex + 1) + '个按钮')$0",
+      "},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.showActionSheet"
   },
+
+  // Base64
+  "uniapp.base64ToArrayBuffer": {
+    "prefix": "uni.base64ToArrayBuffer",
+    "body": [
+      "uni.base64ToArrayBuffer(${1:base64})"
+    ],
+    "description": "uni.base64ToArrayBuffer"
+  },
+  "uniapp.arrayBufferToBase64": {
+    "prefix": "uni.arrayBufferToBase64",
+    "body": [
+      "uni.arrayBufferToBase64(${1:arrayBuffer})"
+    ],
+    "description": "uni.arrayBufferToBase64"
+  },
+
+  // 路由、导航 route/navigation
   "uni.navigateTo": {
     "prefix": "uni.navigateTo",
     "body": [
       "uni.navigateTo({ url: '$1' })"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.navigateTo"
   },
   "uni.navigateTo:callback": {
@@ -134,12 +138,11 @@
     "body": [
       "uni.navigateTo({",
       "\turl: '$1',",
-      "\tsuccess: res => {},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.navigateTo:callback"
   },
   "uni.redirectTo": {
@@ -147,7 +150,6 @@
     "body": [
       "uni.redirectTo({ url: '$1' })"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.redirectTo"
   },
   "uni.redirectTo:callback": {
@@ -155,12 +157,11 @@
     "body": [
       "uni.redirectTo({",
       "\turl: '$1',",
-      "\tsuccess: res => {},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.redirectTo:callback"
   },
   "uni.navigateBack": {
@@ -168,7 +169,6 @@
     "body": [
       "uni.navigateBack()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.navigateBack"
   },
   "uni.navigateBack:delta": {
@@ -176,7 +176,6 @@
     "body": [
       "uni.navigateBack({ delta: ${1:1} })"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.navigateBack:delta"
   },
   "uni.reLaunch": {
@@ -186,7 +185,6 @@
       "\turl: '$0'",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.reLaunch"
   },
   "uni.switchTab": {
@@ -196,19 +194,19 @@
       "\turl: '$0'",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.switchTab"
   },
+
+  // 刷新 refresh
   "uni.startPullDownRefresh": {
     "prefix": "uni.startPullDownRefresh",
     "body": [
       "uni.startPullDownRefresh({",
-      "\tsuccess: res => {},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.startPullDownRefresh"
   },
   "uni.stopPullDownRefresh": {
@@ -216,20 +214,20 @@
     "body": [
       "uni.stopPullDownRefresh()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.stopPullDownRefresh"
   },
+
+  // 第三方服务
   "uni.login": {
     "prefix": "uni.login",
     "body": [
       "uni.login({",
       "\tprovider: '$1',",
-      "\tsuccess: res => {},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.login"
   },
   "uni.share": {
@@ -241,12 +239,11 @@
       "\ttitle: '$3',",
       "\thref: '$4',",
       "\timageUrl: '$5',",
-      "\tsuccess: res => {},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.share"
   },
   "uni.requestPayment": {
@@ -255,29 +252,28 @@
       "uni.requestPayment({",
       "\tprovider: '$1',",
       "\torderInfo: '$2',",
-      "\tsuccess: res => {$0},",
+      "\tsuccess: (res) => {$0},",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.requestPayment"
   },
-  "uniapp.base64ToArrayBuffer": {
-    "prefix": "uni.base64ToArrayBuffer",
+
+  // 请求 request
+  "uni.request": {
+    "prefix": "uni.request",
     "body": [
-      "uni.base64ToArrayBuffer(${1:base64})"
+      "uni.request({",
+      "\turl: '$1',",
+      "\tmethod: '${2:GET}',",
+      "\tdata: {$3},",
+      "\tsuccess: (res) => {$0},",
+      "\tfail: () => {},",
+      "\tcomplete: () => {}",
+      "})"
     ],
-    "scope": "typescript,javascript",
-    "description": "uni.base64ToArrayBuffer"
-  },
-  "uniapp.arrayBufferToBase64": {
-    "prefix": "uni.arrayBufferToBase64",
-    "body": [
-      "uni.arrayBufferToBase64(${1:arrayBuffer})"
-    ],
-    "scope": "typescript,javascript",
-    "description": "uni.arrayBufferToBase64"
+    "description": "uni.request"
   },
   "uni.uploadFile": {
     "prefix": "uni.uploadFile",
@@ -292,7 +288,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.uploadFile"
   },
   "uni.downloadFile": {
@@ -310,15 +305,6 @@
     "description": "uni.downloadFile"
   },
 
-  "uni globalData": {
-    "prefix": "uni:globalData",
-    "body": [
-      "getApp().globalData."
-    ],
-    "scope": "typescript,javascript",
-    "description": "uni:globalData"
-  },
-
   // socket
   "uni.connectSocket": {
     "prefix": "uni.connectSocket",
@@ -334,7 +320,6 @@
       "\tmethod: 'GET'",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.connectSocket"
   },
   "uni.onSocketOpen": {
@@ -344,7 +329,6 @@
       "\tconsole.log('WebSocket opened')",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.onSocketOpen"
   },
   "uni.onSocketError": {
@@ -354,7 +338,6 @@
       "\tconsole.log('WebSocket error')",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.onSocketError"
   },
   "uni.onSocketMessage": {
@@ -364,7 +347,6 @@
       "\tconsole.log('收到服务器内容：' + res.data)",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.onSocketMessage"
   },
   "uni.sendSocketMessage": {
@@ -374,7 +356,6 @@
       "\tdata: ${0: msg}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.sendSocketMessage"
   },
   "uni.closeSocket": {
@@ -382,7 +363,6 @@
     "body": [
       "uni.closeSocket()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.closeSocket"
   },
   "uni.onSocketClose": {
@@ -392,11 +372,10 @@
       "\tconsole.log('WebSocket closed')",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.onSocketClose"
   },
 
-  // storage
+  // 存储 storage
   "uni.setStorage": {
     "prefix": "uni.setStorage",
     "body": [
@@ -408,7 +387,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.setStorage"
   },
   "uni.setStorageSync": {
@@ -416,7 +394,6 @@
     "body": [
       "uni.setStorageSync('$1', '$2')"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.setStorageSync"
   },
   "uni.getStorage": {
@@ -429,7 +406,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.getStorage"
   },
   "uni.getStorageSync": {
@@ -437,7 +413,6 @@
     "body": [
       "uni.getStorageSync('$0')"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.getStorageSync"
   },
   "uni.getStorageInfo": {
@@ -449,7 +424,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.getStorageInfo"
   },
   "uni.getStorageInfoSync": {
@@ -457,7 +431,6 @@
     "body": [
       "uni.getStorageInfoSync()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.getStorageInfoSync"
   },
   "uni.removeStorage": {
@@ -470,7 +443,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.removeStorage"
   },
   "uni.removeStorageSync": {
@@ -478,7 +450,6 @@
     "body": [
       "uni.removeStorageSync('$0')"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.removeStorageSync"
   },
   "uni.clearStorage": {
@@ -486,7 +457,6 @@
     "body": [
       "uni.clearStorage()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.clearStorage"
   },
   "uni.clearStorageSync": {
@@ -494,16 +464,15 @@
     "body": [
       "uni.clearStorageSync()"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.clearStorageSync"
   },
 
-  // location
+  // 位置 location
   "uni.chooseLocation": {
     "prefix": "uni.chooseLocation",
     "body": [
       "uni.chooseLocation({",
-      "\tsuccess: function (res) {",
+      "\tsuccess: (res) => {",
       "\t\tconsole.log('位置名称：' + res.name)",
       "\t\tconsole.log('详细地址：' + res.address)",
       "\t\tconsole.log('纬度：' + res.latitude)",
@@ -511,7 +480,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.chooseLocation"
   },
   "uni.getLocation": {
@@ -519,12 +487,11 @@
     "body": [
       "uni.getLocation({",
       "\ttype: '${1|wgs84,gcj02|}',",
-      "\tsuccess: res => {$0}",
+      "\tsuccess: (res) => {$0}",
       "\tfail: () => {},",
       "\tcomplete: () => {}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.getLocation"
   },
   "uni.openLocation": {
@@ -532,24 +499,23 @@
     "body": [
       "uni.getLocation({",
       "\ttype: '${1|wgs84,gcj02|}',",
-      "\tsuccess: function (res) {",
+      "\tsuccess: (res) => {",
       "\t\tconst latitude = res.latitude",
       "\t\tconst longitude = res.longitude",
       "\t\tuni.openLocation({",
       "\t\t\tlatitude: latitude,",
       "\t\t\tlongitude: longitude,",
-      "\t\t\tsuccess: function () {",
+      "\t\t\tsuccess: () => {",
       "\t\t\t\t$0",
       "\t\t\t}",
       "\t\t})",
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.openLocation"
   },
 
-  // image
+  // 图像 image
   "uni.chooseImage": {
     "prefix": "uni.chooseImage",
     "body": [
@@ -568,7 +534,6 @@
       "\t}",
       "})"
     ],
-    "scope": "typescript,javascript",
     "description": "uni.chooseImage"
   },
   "uni.previewImage": {
@@ -580,7 +545,7 @@
       "\t\t\turls: res.tempFilePaths,",
       "\t\t\tlongPressActions: {",
       "\t\t\t\titemList: [${1:'发送给朋友', '保存图片', '收藏'}],",
-      "\t\t\t\tsuccess: function(data) {",
+      "\t\t\t\tsuccess: (data) => {",
       "\t\t\t\t\tconsole.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片')",
       "\t\t\t\t\t$0",
       "\t\t\t\t},",
@@ -642,371 +607,342 @@
     ],
     "description": "uni.compressImage"
   },
-// "uniapp-获取全局唯一的录音管理器 recorderManager": {
-//     "prefix": "uni.getRecorderManager()",
-//     "body": [
-//         "const recorderManager = uni.getRecorderManager();//其他详细请查看官方文档https://uniapp.dcloud.io/api/media/record-manager"
 
-//     ],
-//     "description": "uniapp-获取全局唯一的录音管理器 recorderManager"
-// },
-// "uniapp-获取全局唯一的背景音频管理器 backgroundAudioManager": {
-//     "prefix": "uni.getBackgroundAudioManager()",
-//     "body": [
-//         "uni.getBackgroundAudioManager();//其他详细请查看官方文档https://uniapp.dcloud.io/api/media/background-audio-manager$0"
-//     ],
-//     "description": "uniapp-获取全局唯一的背景音频管理器 backgroundAudioManager"
-// },
-// "uniapp-创建并返回内部 audio 上下文 innerAudioContext 对象": {
-//     "prefix": "uni.createInnerAudioContext()",
-//     "body": [
-//         "const innerAudioContext = uni.createInnerAudioContext();",
-//         "innerAudioContext.autoplay = true;",
-//         "innerAudioContext.src = 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3';",
-//         "innerAudioContext.onPlay(() => {",
-//             "\tconsole.log('开始播放');",
-//         "});",
-//         "innerAudioContext.onError((res) => {",
-//             "\tconsole.log(res.errMsg);",
-//             "\tconsole.log(res.errCode);",
-//         "});$0"
-//     ],
-//     "description": "uniapp-创建并返回内部 audio 上下文 innerAudioContext 对象"
-// },
-// "uniapp-拍摄视频或从手机相册中选视频": {
-//     "prefix": "uni.chooseVideo()",
-//     "body": [
-//         "uni.chooseVideo({",
-//             "\tcount: 1,",
-//             "\tsourceType: ['camera', 'album'],",
-//             "\tsuccess: function (res) {",
-//                 "\t\tself.src = res.tempFilePath;",
-//             "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-拍摄视频或从手机相册中选视频"
-// },
-// "uniapp-保存视频到系统相册": {
-//     "prefix": "uni.saveVideoToPhotosAlbum()",
-//     "body": [
-//         "uni.saveVideoToPhotosAlbum({",
-//             "\tfilePath: res.tempFilePath,",
-//             "\tsuccess: function () {",
-//                 "\t\tconsole.log('save success');",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-保存视频到系统相册"
-// },
-// "uniapp-创建并返回 video 上下文 videoContext 对象": {
-//     "prefix": "uni.createVideoContext(videoId, this)",
-//     "body": [
-//         "this.videoContext = uni.createVideoContext('myVideo')//更多请查找官方文档https://uniapp.dcloud.io/api/media/video-context"
-//     ],
-//     "description": "uniapp-创建并返回 video 上下文 videoContext 对象"
-// },
-// "uniapp-创建并返回 camera 组件的上下文 cameraContext 对象": {
-//     "prefix": "uni.createCameraContext()",
-//     "body": [
-//         "uni.createCameraContext()//更多请查找官方文档https://uniapp.dcloud.io/api/media/camera-context"
-//     ],
-//     "description": "uniapp-创建并返回 camera 组件的上下文 cameraContext 对象"
-// },
-// "uniapp-": {
-//     "prefix": "uni.createLivePlayerContext(livePlayerId, this)",
-//     "body": [
-//         "uni.createLivePlayerContext(livePlayerId, this)//更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
-//     ],
-//     "description": "uniapp-"
-// },
-// "uniapp-创建 live-pusher 上下文 livePusherContext 对象": {
-//     "prefix": "uni.createLivePusherContext(livePusherId, this)",
-//     "body": [
-//         "uni.createLivePusherContext(livePusherId, this)//更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
-//     ],
-//     "description": "uniapp-创建 live-pusher 上下文 livePusherContext 对象"
-// },
-// "uniapp-获取系统信息": {
-//     "prefix": "uni.getSystemInfo(OBJECT)",
-//     "body": [
-//         "uni.getSystemInfo({",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log(res.model);",
-//                 "\t\tconsole.log(res.pixelRatio);",
-//                 "\t\tconsole.log(res.windowWidth);",
-//                 "\t\tconsole.log(res.windowHeight);",
-//                 "\t\tconsole.log(res.language);",
-//                 "\t\tconsole.log(res.version);",
-//                 "\t\tconsole.log(res.platform);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取系统信息"
-// },
-// "uniapp-获取系统信息同步接口": {
-//     "prefix": "uni.getSystemInfoSync()",
-//     "body": [
-//         "const res = uni.getSystemInfoSync();",
-//         "console.log(res.model);",
-//         "console.log(res.pixelRatio);",
-//         "console.log(res.windowWidth);",
-//         "console.log(res.windowHeight);",
-//         "console.log(res.language);",
-//         "console.log(res.version);",
-//         "console.log(res.platform);"
-//     ],
-//     "description": "uniapp-获取系统信息同步接口"
-// },
-// "uniapp-判断应用的 API，回调，参数，组件等是否在当前版本可用": {
-//     "prefix": "uni.canIUse(String)",
-//     "body": [
-//         "uni.canIUse('getSystemInfoSync.return.screenWidth');",
-//         "uni.canIUse('getSystemInfo.success.screenWidth');",
-//         "uni.canIUse('showToast.object.image');",
-//         "uni.canIUse('request.object.method.GET');",
-//         "uni.canIUse('live-player');",
-//         "uni.canIUse('text.selectable');",
-//         "uni.canIUse('button.open-type.contact');"
-//     ],
-//     "description": "uniapp-判断应用的 API，回调，参数，组件等是否在当前版本可用"
-// },
-// "uniapp-监听内存不足告警事件": {
-//     "prefix": "uni.onMemoryWarning()",
-//     "body": [
-//         "uni.onMemoryWarning(function (){",
-//             "\tconsole.log('onMemoryWarningReceive')$0",
-//         "});"
-//     ],
-//     "description": "uniapp-监听内存不足告警事件"
-// },
-// "uniapp-获取网络类型": {
-//     "prefix": "uni.getNetworkType(OBJECT)",
-//     "body": [
-//         "uni.getNetworkType({",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log(res.networkType);$0",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取网络类型"
-// },
-// "uniapp-监听网络状态变化": {
-//     "prefix": "uni.onNetworkStatusChange()",
-//     "body": [
-//         "uni.onNetworkStatusChange(function (res) {",
-//             "\tconsole.log(res.isConnected);",
-//             "\tconsole.log(res.networkType);$0",
-//         "});"
-//     ],
-//     "description": "uniapp-"
-// },
-// "uniapp-监听加速度数据": {
-//     "prefix": "uni.onAccelerometerChange(CALLBACK)",
-//     "body": [
-//         "uni.onAccelerometerChange(function (res) {",
-//             "\tconsole.log(res.x);",
-//             "\tconsole.log(res.y);",
-//             "\tconsole.log(res.z);",
-//         "});"
-//     ],
-//     "description": "uniapp-监听加速度数据"
-// },
-// "uniapp-开始监听加速度数据": {
-//     "prefix": "uni.startAccelerometer()",
-//     "body": [
-//         "uni.startAccelerometer();"
-//     ],
-//     "description": "uniapp-开始监听加速度数据"
-// },
-// "uniapp-停止监听加速度数据": {
-//     "prefix": "uni.stopAccelerometer()",
-//     "body": [
-//         "uni.stopAccelerometer();"
-//     ],
-//     "description": "uniapp-停止监听加速度数据"
-// },
-// "uniapp-监听罗盘数据": {
-//     "prefix": "uni.onCompassChange(CALLBACK)",
-//     "body": [
-//         "uni.onCompassChange(function (res) {",
-//             "\tconsole.log(res.direction);$0",
-//         "});//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
-//     ],
-//     "description": "uniapp-监听罗盘数据"
-// },
-// "uniapp-开始监听罗盘数据": {
-//     "prefix": "uni.startCompass(OBJECT)",
-//     "body": [
-//         "uni.startCompass()//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
-//     ],
-//     "description": "uniapp-开始监听罗盘数据"
-// },
-// "uniapp-停止监听罗盘数据": {
-//     "prefix": "uni.stopCompass()",
-//     "body": [
-//         "uni.stopCompass()//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
-//     ],
-//     "description": "uniapp-停止监听罗盘数据"
-// },
-// "uniapp-监听陀螺仪数据变化事件": {
-//     "prefix": "uni.onGyroscopeChange()",
-//     "body": [
-//         "uni.onGyroscopeChange(CALLBACK)//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
-//     ],
-//     "description": "uniapp-监听陀螺仪数据变化事件"
-// },
-// "uniapp-隐藏消息提示框": {
-//     "prefix": "uni.hideToast()",
-//     "body": [
-//         "uni.hideToast();"
-//     ],
-//     "description": "uniapp-隐藏消息提示框"
-// },
-// "uniapp-显示模态弹窗": {
-//     "prefix": "uni.showModal()",
-//     "body": [
-//         "uni.showModal({",
-//             "\ttitle: '提示',",
-//             "\tcontent: '这是一个模态弹窗',",
-//             "\tsuccess: function (res) {",
-//                 "\t\tif (res.confirm) {",
-//                     "\t\t\tconsole.log('用户点击确定');",
-//                 "\t\t} else if (res.cancel) {",
-//                     "\t\t\tconsole.log('用户点击取消');",
-//                 "\t\t}",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-显示模态弹窗"
-// },
-// "uniapp-​显示操作菜单": {
-//     "prefix": "uni.showActionSheet()",
-//     "body": [
-//         "uni.showActionSheet({",
-//             "\titemList: ['A', 'B', 'C'],",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log('选中了第' + (res.tapIndex + 1) + '个按钮');",
-//             "\t},",
-//             "\tfail: function (res) {",
-//                 "\t\tconsole.log(res.errMsg);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-​显示操作菜单"
-// },
-// "uniapp-动态设置当前页面的标题": {
-//     "prefix": "uni.setNavigationBarTitle()",
-//     "body": [
-//         "uni.setNavigationBarTitle({",
-//             "\ttitle: '新的标题'$0",
-//         "});"
-//     ],
-//     "description": "uniapp-动态设置当前页面的标题"
-// },
+  // 音视频 audio & video
+  "uni.getRecorderManager": {
+    "prefix": "uni.getRecorderManager",
+    "body": [
+      "const recorderManager = uni.getRecorderManager()"
+    ],
+    "description": "uni.getRecorderManager"
+  },
+  "uni.getBackgroundAudioManager": {
+    "prefix": "uni.getBackgroundAudioManager",
+    "body": [
+      "const backgroundAudioManager = uni.getBackgroundAudioManager()"
+    ],
+    "description": "uni.getBackgroundAudioManager"
+  },
+  "uni.createInnerAudioContext": {
+    "prefix": "uni.createInnerAudioContext",
+    "body": [
+      "const innerAudioContext = uni.createInnerAudioContext()",
+      "innerAudioContext.autoplay = true",
+      "innerAudioContext.src = '${1:https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3}'",
+      "innerAudioContext.onPlay(() => {",
+      "\t$0",
+      "})",
+      "innerAudioContext.onError((res) => {",
+      "})"
+    ],
+    "description": "uni.createInnerAudioContext"
+  },
+  "uni.chooseVideo": {
+    "prefix": "uni.chooseVideo",
+    "body": [
+      "uni.chooseVideo({",
+      "\tcount: 1,",
+      "\tsourceType: [${1:'camera', 'album'}],",
+      "\tsuccess: (res) => {",
+      "\t\tconsole(res.tempFilePath)",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.chooseVideo"
+  },
+  "uni.saveVideoToPhotosAlbum": {
+    "prefix": "uni.saveVideoToPhotosAlbum",
+    "body": [
+      "uni.chooseVideo({",
+      "\tcount: 1,",
+      "\tsourceType: [${1:'camera', 'album'}],",
+      "\tsuccess: (res) => {",
+      "\t\tuni.saveVideoToPhotosAlbum({",
+      "\t\t\tfilePath: res.tempFilePath,",
+      "\t\t\tsuccess: function () {",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.saveVideoToPhotosAlbum"
+  },
+  "uni.createVideoContext": {
+    "prefix": "uni.createVideoContext",
+    "body": [
+      "const videoContext = uni.createVideoContext('${1:videoId}', this)"
+    ],
+    "description": "uni.createVideoContext"
+  },
+  "uni.createCameraContext": {
+    "prefix": "uni.createCameraContext",
+    "body": [
+      "const cameraContext = uni.createCameraContext()"
+    ],
+    "description": "uni.createCameraContext"
+  },
+  "uni.createLivePlayerContext": {
+    "prefix": "uni.createLivePlayerContext",
+    "body": [
+      "uni.createLivePlayerContext('${1:livePlayerId}', this)"
+    ],
+    "description": "uni.createLivePlayerContext"
+  },
+  "uni.createLivePusherContext": {
+    "prefix": "uni.createLivePusherContext",
+    "body": [
+      "uni.createLivePusherContext('${1:livePusherId}', this)"
+    ],
+    "description": "uni.createLivePusherContext"
+  },
 
-// "uniapp-设置页面导航条颜色": {
-//     "prefix": "uni.setNavigationBarColor()",
-//     "body": [
-//         "uni.setNavigationBarColor({",
-//             "\tfrontColor: '#ffffff',",
-//             "\tbackgroundColor: '#ff0000',",
-//             "\tanimation: {",
-//                 "\t\tduration: 400,",
-//                 "\t\ttimingFunc: 'easeIn'",
-//             "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-设置页面导航条颜色"
-// },
-// "uniapp-在当前页面显示导航条加载动画": {
-//     "prefix": "uni.showNavigationBarLoading()",
-//     "body": [
-//         "uni.showNavigationBarLoading()"
-//     ],
-//     "description": "uniapp-在当前页面显示导航条加载动画"
-// },
-// "uniapp-在当前页面隐藏导航条加载动画": {
-//     "prefix": "uni.hideNavigationBarLoading()",
-//     "body": [
-//         "uni.hideNavigationBarLoading()"
-//     ],
-//     "description": "uniapp-在当前页面隐藏导航条加载动画"
-// },
-// "uniapp-动态设置 tabBar 某一项的内容": {
-//     "prefix": "uni.setTabBarItem()",
-//     "body": [
-//         "uni.setTabBarItem({",
-//             "\tindex: 0,",
-//             "\ttext: 'text',",
-//             "\ticonPath: '/path/to/iconPath',",
-//             "\tselectedIconPath: '/path/to/selectedIconPath'",
-//         "});"
-//     ],
-//     "description": "uniapp-动态设置 tabBar 某一项的内容"
-// },
-// "uniapp-动态设置 tabBar 的整体样式": {
-//     "prefix": "uni.setTabBarStyle()",
-//     "body": [
-//         "uni.setTabBarStyle({",
-//             "\tcolor: '#FF0000',",
-//             "\tselectedColor: '#00FF00',",
-//             "\tbackgroundColor: '#0000FF',",
-//             "\tborderStyle: 'white'",
-//         "});"
-//     ],
-//     "description": "uniapp-动态设置 tabBar 的整体样式"
-// },
-// "uniapp-隐藏 tabBar": {
-//     "prefix": "uni.hideTabBar()",
-//     "body": [
-//         "uni.hideTabBar()"
-//     ],
-//     "description": "uniapp-隐藏 tabBar"
-// },
-// "uniapp-显示 tabBar": {
-//     "prefix": "uni.showTabBar()",
-//     "body": [
-//         "uni.showTabBar()"
-//     ],
-//     "description": "uniapp-显示 tabBar"
-// },
-// "uniapp-为 tabBar 某一项的右上角添加文本": {
-//     "prefix": "uni.setTabBarBadge()",
-//     "body": [
-//         "uni.setTabBarBadge({",
-//             "index: 0,",
-//             "text: '1'",
-//         "});"
-//     ],
-//     "description": "uniapp-为 tabBar 某一项的右上角添加文本"
-// },
-// "uniapp-移除 tabBar 某一项右上角的文本": {
-//     "prefix": "uni.removeTabBarBadge()",
-//     "body": [
-//         "uni.removeTabBarBadge({",
-//             "index: 0,",
-//         "});"
-//     ],
-//     "description": "uniapp-移除 tabBar 某一项右上角的文本"
-// },
-// "uniapp-显示 tabBar 某一项的右上角的红点": {
-//     "prefix": "uni.showTabBarRedDot(OBJECT)",
-//     "body": [
-//         "uni.showTabBarRedDot({",
-//             "index: 0,",
-//         "});"
-//     ],
-//     "description": "uniapp-显示 tabBar 某一项的右上角的红点"
-// },
-// "uniapp-隐藏 tabBar 某一项的右上角的红点": {
-//     "prefix": "uni.hideTabBarRedDot(OBJECT)",
-//     "body": [
-//         "uni.hideTabBarRedDot({",
-//             "index: 0,",
-//         "});"
-//     ],
-//     "description": "uniapp-隐藏 tabBar 某一项的右上角的红点"
-// },
+  // 系统
+  "uni.getSystemInfo": {
+    "prefix": "uni.getSystemInfo",
+    "body": [
+      "uni.getSystemInfo({",
+      "\tsuccess: (res) => {",
+      "\t\tconsole.log(res.model)",
+      "\t\tconsole.log(res.pixelRatio)",
+      "\t\tconsole.log(res.windowWidth)",
+      "\t\tconsole.log(res.windowHeight)",
+      "\t\tconsole.log(res.language)",
+      "\t\tconsole.log(res.version)",
+      "\t\tconsole.log(res.platform)",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.getSystemInfo"
+  },
+  "uni.getSystemInfoSync": {
+    "prefix": "uni.getSystemInfoSync",
+    "body": [
+      "const res = uni.getSystemInfoSync()",
+      "console.log(res.model)",
+      "console.log(res.pixelRatio)",
+      "console.log(res.windowWidth)",
+      "console.log(res.windowHeight)",
+      "console.log(res.language)",
+      "console.log(res.version)",
+      "console.log(res.platform)"
+    ],
+    "description": "uni.getSystemInfoSync"
+  },
+  "uni.canIUse": {
+    "prefix": "uni.canIUse",
+    "body": [
+      "uni.canIUse('$0')"
+    ],
+    "description": "uni.canIUse"
+  },
+  "uni.onMemoryWarning": {
+    "prefix": "uni.onMemoryWarning",
+    "body": [
+      "uni.onMemoryWarning(() => {",
+      "\t$0",
+      "})"
+    ],
+    "description": "uni.onMemoryWarning"
+  },
+
+  // 网络 network
+  "uni.getNetworkType": {
+    "prefix": "uni.getNetworkType",
+    "body": [
+      "uni.getNetworkType({",
+      "\tsuccess: (res) => {",
+      "\t\tconsole.log(res.networkType)$0",
+      "\t}",
+      "});"
+    ],
+    "description": "uni.getNetworkType"
+  },
+  "uni.onNetworkStatusChange": {
+    "prefix": "uni.onNetworkStatusChange",
+    "body": [
+      "uni.onNetworkStatusChange(function (res) {",
+      "\tconsole.log(res.isConnected)",
+      "\tconsole.log(res.networkType)$0",
+      "});"
+    ],
+    "description": "uni.onNetworkStatusChange"
+  },
+
+  // 硬件、传感器
+  "uni.onAccelerometerChange": {
+    "prefix": "uni.onAccelerometerChange",
+    "body": [
+      "uni.onAccelerometerChange((res) => {",
+      "\tconsole.log(res.x)",
+      "\tconsole.log(res.y)",
+      "\tconsole.log(res.z)$0",
+      "})"
+    ],
+    "description": "uni.onAccelerometerChange"
+  },
+  "uni.startAccelerometer": {
+    "prefix": "uni.startAccelerometer",
+    "body": [
+      "uni.startAccelerometer()"
+    ],
+    "description": "uni.startAccelerometer"
+  },
+  "uni.stopAccelerometer": {
+    "prefix": "uni.stopAccelerometer",
+    "body": [
+      "uni.stopAccelerometer()"
+    ],
+    "description": "uni.stopAccelerometer"
+  },
+  "uni.onCompassChange": {
+    "prefix": "uni.onCompassChange",
+    "body": [
+      "uni.onCompassChange((res) => {",
+      "\tconsole.log(res.direction)$0",
+      "})"
+    ],
+    "description": "uni.onCompassChange"
+  },
+  "uni.startCompass": {
+    "prefix": "uni.startCompass",
+    "body": [
+      "uni.startCompass()"
+    ],
+    "description": "uni.startCompass"
+  },
+  "uni.stopCompass": {
+    "prefix": "uni.stopCompass",
+    "body": [
+      "uni.stopCompass"
+    ],
+    "description": "uni.stopCompass"
+  },
+  "uni.onGyroscopeChange": {
+    "prefix": "uni.onGyroscopeChange",
+    "body": [
+      "uni.onGyroscopeChange()"
+    ],
+    "description": "uni.onGyroscopeChange"
+  },
+
+  // 导航栏 NavigationBar
+  "uni.setNavigationBarTitle": {
+    "prefix": "uni.setNavigationBarTitle",
+    "body": [
+      "uni.setNavigationBarTitle({",
+      "\ttitle: '$0'",
+      "})"
+    ],
+    "description": "uni.setNavigationBarTitle"
+  },
+  "uni.setNavigationBarColor": {
+    "prefix": "uni.setNavigationBarColor",
+    "body": [
+      "uni.setNavigationBarColor({",
+      "\tfrontColor: '${1:#ffffff}',",
+      "\tbackgroundColor: '${2:#ff0000}',",
+      "\tanimation: {",
+      "\t\tduration: ${3:400},",
+      "\t\ttimingFunc: '${4:easeIn}'",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.setNavigationBarColor"
+  },
+  "uni.showNavigationBarLoading": {
+    "prefix": "uni.showNavigationBarLoading",
+    "body": [
+      "uni.showNavigationBarLoading()"
+    ],
+    "description": "uni.showNavigationBarLoading"
+  },
+  "uni.hideNavigationBarLoading": {
+    "prefix": "uni.hideNavigationBarLoading",
+    "body": [
+      "uni.hideNavigationBarLoading()"
+    ],
+    "description": "uni.hideNavigationBarLoading"
+  },
+
+  // TabBar
+  "uni.setTabBarItem": {
+    "prefix": "uni.setTabBarItem",
+    "body": [
+      "uni.setTabBarItem({",
+      "\tindex: ${1:0},",
+      "\ttext: '${2:text}',",
+      "\ticonPath: '${3:/path/to/iconPath}',",
+      "\tselectedIconPath: '${4:/path/to/selectedIconPath}'",
+      "})"
+    ],
+    "description": "uni.setTabBarItem"
+  },
+  "uni.setTabBarStyle": {
+    "prefix": "uni.setTabBarStyle",
+    "body": [
+      "uni.setTabBarStyle({",
+      "\tcolor: '${1:#FF0000}',",
+      "\tselectedColor: '${2:#00FF00}',",
+      "\tbackgroundColor: '${3:#0000FF}',",
+      "\tborderStyle: '${4:white}'",
+      "})"
+    ],
+    "description": "uni.setTabBarStyle"
+  },
+  "uni.hideTabBar": {
+    "prefix": "uni.hideTabBar",
+    "body": [
+      "uni.hideTabBar()"
+    ],
+    "description": "uni.hideTabBar"
+  },
+  "uni.showTabBar": {
+    "prefix": "uni.showTabBar",
+    "body": [
+        "uni.showTabBar()"
+    ],
+    "description": "uni.showTabBar"
+  },
+  "uni.setTabBarBadge": {
+    "prefix": "uni.setTabBarBadge",
+    "body": [
+      "uni.setTabBarBadge({",
+      "\tindex: ${1:0},",
+      "\ttext: '${1:text}'",
+      "})"
+    ],
+    "description": "uni.setTabBarBadge"
+  },
+  "uni.removeTabBarBadge": {
+    "prefix": "uni.removeTabBarBadge",
+    "body": [
+      "uni.removeTabBarBadge({",
+      "\tindex: ${1:0},",
+      "})"
+    ],
+    "description": "uni.removeTabBarBadge"
+  },
+  "uni.showTabBarRedDot": {
+    "prefix": "uni.showTabBarRedDot",
+    "body": [
+      "uni.showTabBarRedDot({",
+      "\tindex: ${1:0},",
+      "})"
+    ],
+    "description": "uni.showTabBarRedDot"
+  },
+  "uni.hideTabBarRedDot": {
+    "prefix": "uni.hideTabBarRedDot",
+    "body": [
+      "uni.hideTabBarRedDot({",
+      "\tindex: ${1:0},",
+      "})"
+    ],
+    "description": "uni.hideTabBarRedDot"
+  },
+
 // "uniapp-动态设置窗口的背景色": {
 //     "prefix": "uni.setBackgroundColor()",
 //     "body": [
@@ -1158,4 +1094,14 @@
 //     ],
 //     "description": "uniapp-新开页面打开文档"
 // }
+
+
+  // 其他
+  "uni globalData": {
+    "prefix": "uni:globalData",
+    "body": [
+      "getApp().globalData."
+    ],
+    "description": "uni:globalData"
+  },
 }

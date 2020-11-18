@@ -35,6 +35,11 @@
     "workspaceContains:**/manifest.json"
   ],
   "main": "./src/main.js",
+  "extensionDependencies": [
+    "octref.vetur",
+    "sysoev.language-stylus",
+    "syler.sass-indented"
+  ],
   "contributes": {
     "snippets": [
       {
@@ -56,10 +61,6 @@
       {
         "language": "vue-html",
         "path": "./src/snippets/vue-html.code-snippets"
-      },
-      {
-        "language": "pug",
-        "path": "./src/snippets/pug.code-snippets"
       },
       {
         "language": "jade",
