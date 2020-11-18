@@ -295,27 +295,6 @@
     "scope": "typescript,javascript",
     "description": "uni.uploadFile"
   },
-  "uni.chooseImage": {
-    "prefix": "uni.chooseImage",
-    "body": [
-      "uni.chooseImage({",
-      "\tsuccess: (imageRes) => {",
-      "\t\tconst tempFilePaths = imageRes.tempFilePaths",
-      "\t\tuni.uploadFile({",
-      "\t\t\turl: '$1',",
-      "\t\t\tfilePath: tempFilePaths[0],",
-      "\t\t\tname: '$2',",
-      "\t\t\tformData: {$3},",
-      "\t\t\tsuccess: (res) => {",
-      "\t\t\t\t$0",
-      "\t\t\t}",
-      "\t\t});",
-      "\t}",
-      "})"
-    ],
-    "scope": "typescript,javascript",
-    "description": "uni.chooseImage"
-  },
   "uni.downloadFile": {
     "prefix": "uni.downloadFile",
     "body": [
@@ -570,62 +549,99 @@
     "description": "uni.openLocation"
   },
 
-// "uniapp-预览图片": {
-//     "prefix": "uni.previewImage()",
-//     "body": [
-//         "uni.previewImage({",
-//             "\turls: res.tempFilePaths,",
-//             "\tlongPressActions: {",
-//                 "\t\titemList: ['发送给朋友', '保存图片', '收藏'],",
-//                 "\t\tsuccess: function(data) {",
-//                     "\t\t\tconsole.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');",
-//                 "\t\t},",
-//                 "\t\tfail: function(err) {",
-//                     "\t\t\tconsole.log(err.errMsg);",
-//                 "\t\t}",
-//             "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-预览图片"
-// },
-// "uniapp-获取图片信息": {
-//     "prefix": "uni.getImageInfo()",
-//     "body": [
-//         "uni.getImageInfo({",
-//             "\tsrc: res.tempFilePaths[0],",
-//             "\tsuccess: function (image) {",
-//                 "\t\tconsole.log(image.width);",
-//                 "\t\tconsole.log(image.height);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取图片信息"
-// },
-// "uniapp-保存图片到系统相册": {
-//     "prefix": "uni.saveImageToPhotosAlbum()",
-//     "body": [
-//         "uni.saveImageToPhotosAlbum({",
-//             "\tfilePath: res.tempFilePaths[0],",
-//             "\tsuccess: function () {",
-//                 "\t\tconsole.log('save success');",
-//             "\t}",
-//         "});$0"
-//     ],
-//     "description": "uniapp-保存图片到系统相册"
-// },
-// "uniapp-压缩图片接口，可选压缩质量": {
-//     "prefix": "uni.compressImage()",
-//     "body": [
-//         "uni.compressImage({",
-//             "\tsrc: '/static/logo.jpg',",
-//             "\tquality: 80,",
-//             "\tsuccess: res => {",
-//                 "\t\tconsole.log(res.tempFilePath)",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-压缩图片接口，可选压缩质量"
-// },
+  // image
+  "uni.chooseImage": {
+    "prefix": "uni.chooseImage",
+    "body": [
+      "uni.chooseImage({",
+      "\tsuccess: (imageRes) => {",
+      "\t\tconst tempFilePaths = imageRes.tempFilePaths",
+      "\t\tuni.uploadFile({",
+      "\t\t\turl: '$1',",
+      "\t\t\tfilePath: tempFilePaths[0],",
+      "\t\t\tname: '$2',",
+      "\t\t\tformData: {$3},",
+      "\t\t\tsuccess: (res) => {",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "scope": "typescript,javascript",
+    "description": "uni.chooseImage"
+  },
+  "uni.previewImage": {
+    "prefix": "uni.previewImage",
+    "body": [
+      "uni.chooseImage({",
+      "\tsuccess: (res) => {",
+      "\t\tuni.previewImage({",
+      "\t\t\turls: res.tempFilePaths,",
+      "\t\t\tlongPressActions: {",
+      "\t\t\t\titemList: [${1:'发送给朋友', '保存图片', '收藏'}],",
+      "\t\t\t\tsuccess: function(data) {",
+      "\t\t\t\t\tconsole.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片')",
+      "\t\t\t\t\t$0",
+      "\t\t\t\t},",
+      "\t\t\t\tfail: function(err) {",
+      "\t\t\t\t\tconsole.log(err.errMsg)",
+      "\t\t\t\t}",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.previewImage"
+  },
+  "uni.getImageInfo": {
+    "prefix": "uni.getImageInfo",
+    "body": [
+      "uni.chooseImage({",
+      "\tsuccess: (res) => {",
+      "\t\tuni.getImageInfo({",
+      "\t\t\tsrc: res.tempFilePaths[0],",
+      "\t\t\tsuccess: function (image) {",
+      "\t\t\t\tconsole.log(image.width)",
+      "\t\t\t\tconsole.log(image.height)",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.getImageInfo"
+  },
+  "uni.saveImageToPhotosAlbum": {
+    "prefix": "uni.saveImageToPhotosAlbum",
+    "body": [
+      "uni.chooseImage({",
+      "\tsuccess: (res) => {",
+      "\t\tuni.saveImageToPhotosAlbum({",
+      "\t\t\tfilePath: res.tempFilePaths[0],",
+      "\t\t\tsuccess: function () {",
+      "\t\t\t\t$0",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.saveImageToPhotosAlbum"
+  },
+  "uni.compressImage": {
+    "prefix": "uni.compressImage",
+    "body": [
+      "uni.compressImage({",
+      "\tsrc: '$1',",
+      "\tquality: ${2:80},",
+      "\tsuccess: (res) => {",
+      "\t\tconsole.log(res.tempFilePath)",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.compressImage"
+  },
 // "uniapp-获取全局唯一的录音管理器 recorderManager": {
 //     "prefix": "uni.getRecorderManager()",
 //     "body": [
@@ -1124,7 +1140,7 @@
 // "uniapp-获取文件信息": {
 //     "prefix": "uni.getFileInfo()",
 //     "body": [
-//         "uni.uni.getFileInfo({",
+//         "uni.getFileInfo({",
 //             "\tfilePath: res.fileList[0].filePath,",
 //         "});"
 //     ],
