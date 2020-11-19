@@ -17,6 +17,178 @@
     ]
   },
 
+  // 应用生命周期
+  "onLaunch": {
+    "prefix": "onLaunch",
+    "body": [
+        "onLaunch() {$0},"
+    ],
+    "description": "onLaunch"
+  },
+  "onError": {
+    "prefix": "onError",
+    "body": [
+        "onError() {$0},"
+    ],
+    "description": "onError"
+  },
+  "onUniNViewMessage": {
+    "prefix": "onUniNViewMessage",
+    "body": [
+        "onUniNViewMessage() {$0},"
+    ],
+    "description": "onUniNViewMessage"
+  },
+  "onUnhandledRejection": {
+    "prefix": "onUnhandledRejection",
+    "body": [
+        "onUnhandledRejection() {$0},"
+    ],
+    "description": "onUnhandledRejection"
+  },
+  "onPageNotFound": {
+    "prefix": "onPageNotFound",
+    "body": [
+        "onPageNotFound() {$0},"
+    ],
+    "description": "onPageNotFound"
+  },
+  "onThemeChange": {
+    "prefix": "onThemeChange",
+    "body": [
+        "onThemeChange() {$0},"
+    ],
+    "description": "onThemeChange"
+  },
+
+  // 页面生命周期
+  "onLoad": {
+    "prefix": "onLoad",
+    "body": [
+        "onLoad(args) {$0},"
+    ],
+    "description": "onLoad"
+  },
+  "onShow": {
+    "prefix": "onShow",
+    "body": [
+        "onShow() {$0},"
+    ],
+    "description": "onShow"
+  },
+  "onReady": {
+    "prefix": "onReady",
+    "body": [
+        "onReady() {$0},"
+    ],
+    "description": "onReady"
+  },
+  "onHide": {
+    "prefix": "onHide",
+    "body": [
+        "onHide() {$0},"
+    ],
+    "description": "onHide"
+  },
+  "onUnload": {
+    "prefix": "onUnload",
+    "body": [
+        "onUnload() {$0},"
+    ],
+    "description": "onUnload"
+  },
+  "onResize": {
+    "prefix": "onResize",
+    "body": [
+        "onResize() {$0},"
+    ],
+    "description": "onResize"
+  },
+  "onPullDownRefresh": {
+    "prefix": "onPullDownRefresh",
+    "body": [
+        "onPullDownRefresh() {$0},"
+    ],
+    "description": "onPullDownRefresh"
+  },
+  "onReachBottom": {
+    "prefix": "onReachBottom",
+    "body": [
+        "onReachBottom() {$0},"
+    ],
+    "description": "onReachBottom"
+  },
+  "onTabItemTap": {
+    "prefix": "onTabItemTap",
+    "body": [
+        "onTabItemTap() {$0},"
+    ],
+    "description": "onTabItemTap"
+  },
+  "onShareAppMessage": {
+    "prefix": "onShareAppMessage",
+    "body": [
+        "onShareAppMessage() {$0},"
+    ],
+    "description": "onShareAppMessage"
+  },
+  "onPageScroll": {
+    "prefix": "onPageScroll",
+    "body": [
+        "onPageScroll() {$0},"
+    ],
+    "description": "onPageScroll"
+  },
+  "onNavigationBarButtonTap": {
+    "prefix": "onNavigationBarButtonTap",
+    "body": [
+        "onNavigationBarButtonTap() {$0},"
+    ],
+    "description": "onNavigationBarButtonTap"
+  },
+  "onBackPress": {
+    "prefix": "onBackPress",
+    "body": [
+        "onBackPress() {$0},"
+    ],
+    "description": "onBackPress"
+  },
+  "onNavigationBarSearchInputChanged": {
+    "prefix": "onNavigationBarSearchInputChanged",
+    "body": [
+        "onNavigationBarSearchInputChanged() {$0},"
+    ],
+    "description": "onNavigationBarSearchInputChanged"
+  },
+  "onNavigationBarSearchInputConfirmed": {
+    "prefix": "onNavigationBarSearchInputConfirmed",
+    "body": [
+        "onNavigationBarSearchInputConfirmed() {$0},"
+    ],
+    "description": "onNavigationBarSearchInputConfirmed"
+  },
+  "onNavigationBarSearchInputClicked": {
+    "prefix": "onNavigationBarSearchInputClicked",
+    "body": [
+        "onNavigationBarSearchInputClicked() {$0},"
+    ],
+    "description": "onNavigationBarSearchInputClicked"
+  },
+  "onShareTimeline": {
+    "prefix": "onShareTimeline",
+    "body": [
+        "onShareTimeline() {$0},"
+    ],
+    "description": "onShareTimeline"
+  },
+  "onAddToFavorites": {
+    "prefix": "onAddToFavorites",
+    "body": [
+        "onAddToFavorites() {$0},"
+    ],
+    "description": "onAddToFavorites"
+  },
+
   // 弹出层
   "uni.showToast": {
     "prefix": "uni.showToast",

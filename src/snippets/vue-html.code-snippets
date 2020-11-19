@@ -1,4 +1,5 @@
 {
+  // Comments
   "#ifdef": {
     "prefix": "ifdef",
     "body": [
@@ -17,6 +18,8 @@
     ],
     "scope": "vue-html"
   },
+
+  // Elements
   "view": {
     "prefix": "view",
     "body": "<view>$0</view>",
