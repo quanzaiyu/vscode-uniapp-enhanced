@@ -375,6 +375,77 @@
     "description": "uni.onSocketClose"
   },
 
+  // 文件 file
+  "uni.saveFile": {
+    "prefix": "uni.saveFile",
+    "body": [
+      "uni.saveFile({",
+      "\ttempFilePath: ${1:tempFilePaths[0]},",
+      "\tsuccess: (res) => {",
+      "\t\tlet savedFilePath = res.savedFilePath$0",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.saveFile"
+  },
+  "uni.getSavedFileList": {
+    "prefix": "uni.getSavedFileList",
+    "body": [
+      "uni.getSavedFileList({",
+      "\tsuccess: (res) => {",
+      "\t\tconsole.log(res.fileList)$0",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.getSavedFileList"
+  },
+  "uniapp-获取本地文件的文件信息": {
+      "prefix": "uni.getSavedFileInfo()",
+      "body": [
+          "uni.getSavedFileInfo({",
+              "\tfilePath: 'unifile://somefile', //仅做示例用，非真正的文件路径",
+              "\tsuccess: function (res) {",
+                  "\t\tconsole.log(res.size);",
+                  "\t\tconsole.log(res.createTime);",
+              "\t}",
+          "});"
+      ],
+      "description": "uniapp-获取本地文件的文件信息"
+  },
+  "uniapp-删除本地存储的文件": {
+      "prefix": "uni.removeSavedFile()",
+      "body": [
+          "uni.removeSavedFile({",
+              "\tfilePath: res.fileList[0].filePath,",
+              "\tcomplete: function (res) {",
+                  "\t\tconsole.log(res);",
+              "\t}",
+          "});"
+      ],
+      "description": "uniapp-删除本地存储的文件"
+  },
+  "uniapp-获取文件信息": {
+      "prefix": "uni.getFileInfo()",
+      "body": [
+          "uni.getFileInfo({",
+              "\tfilePath: res.fileList[0].filePath,",
+          "});"
+      ],
+      "description": "uniapp-获取文件信息"
+  },
+  "uniapp-新开页面打开文档,支持格式：doc, xls, ppt, pdf, docx, xlsx, pptx。": {
+      "prefix": "openDocument()",
+      "body": [
+          "openDocument({",
+              "\tfilePath: filePath,",
+              "\tsuccess: function (res) {",
+                  "\t\tconsole.log('打开文档成功');",
+              "\t})",
+          "});"
+      ],
+      "description": "uniapp-新开页面打开文档"
+  },
+
   // 存储 storage
   "uni.setStorage": {
     "prefix": "uni.setStorage",
@@ -943,165 +1014,101 @@
     "description": "uni.hideTabBarRedDot"
   },
 
-// "uniapp-动态设置窗口的背景色": {
-//     "prefix": "uni.setBackgroundColor()",
-//     "body": [
-//         "uni.setBackgroundColor({",
-//             "\tbackgroundColor: '#ffffff'$0",
-//             "\backgroundColorTop: '#ffffff'",
-//             "\backgroundColorBottom: '#ffffff'",
-//         "});"
-//     ],
-//     "description": "uniapp-动态设置窗口的背景色"
-// },
-// "uniapp-动态设置下拉背景字体、loading 图的样式": {
-//     "prefix": "uni.setBackgroundTextStyle()",
-//     "body": [
-//         "uni.setBackgroundTextStyle({",
-//             "\ttextStyle: 'dark' // 下拉背景字体、loading 图的样式为dark$0",
-//         "});"
-//     ],
-//     "description": "uniapp-动态设置下拉背景字体、loading 图的样式"
-// },
-// "uniapp-创建一个动画实例 animation": {
-//     "prefix": "uni.createAnimation()",
-//     "body": [
-//         "var animation = uni.createAnimation({",
-//             "\ttransformOrigin: '50% 50%',",
-//             "\tduration: 1000,",
-//             "\ttimingFunction: 'ease',",
-//             "\tdelay: 0",
-//         "})//官方文档https://uniapp.dcloud.io/api/ui/animation?id=createanimation"
-//     ],
-//     "description": "uniapp-创建一个动画实例 animation"
-// },
-// "uniapp-将页面滚动到目标位置": {
-//     "prefix": "uni.pageScrollTo()",
-//     "body": [
-//         "uni.pageScrollTo({",
-//             "\tscrollTop: 0,",
-//             "\tduration: 300",
-//         "});"
-//     ],
-//     "description": "uniapp-将页面滚动到目标位置"
-// },
+  // 背景 background
+  "uni.setBackgroundColor": {
+    "prefix": "uni.setBackgroundColor",
+    "body": [
+      "uni.setBackgroundColor({",
+      "\tbackgroundColor: '${1:#ffffff}'",
+      "\backgroundColorTop: '${2:#ffffff}'",
+      "\backgroundColorBottom: '${3:#ffffff}'",
+      "})"
+    ],
+    "description": "uni.setBackgroundColor"
+  },
+  "uni.setBackgroundTextStyle": {
+    "prefix": "uni.setBackgroundTextStyle",
+    "body": [
+      "uni.setBackgroundTextStyle({",
+      "\ttextStyle: '${1:dark}'",
+      "})"
+    ],
+    "description": "uni.setBackgroundTextStyle"
+  },
 
-// "uniapp-监听窗口尺寸变化事件": {
-//     "prefix": "uni.onWindowResize()",
-//     "body": [
-//         "uni.onWindowResize((res) => {",
-//             "\tconsole.log('变化后的窗口宽度=' + res.size.windowWidth)",
-//             "\tconsole.log('变化后的窗口高度=' + res.size.windowHeight)",
-//         "})"
-//     ],
-//     "description": "uniapp-监听窗口尺寸变化事件"
-// },
-// "uniapp-取消监听窗口尺寸变化事件": {
-//     "prefix": "uni.offWindowResize()",
-//     "body": [
-//         "uni.offWindowResize(() => {",
-//             "\tconsole.log('取消监听窗口尺寸变化事件')$0",
-//         "});"
-//     ],
-//     "description": "uniapp-取消监听窗口尺寸变化事件"
-// },
-// "uniapp-动态加载字体": {
-//     "prefix": "uni.loadFontFace()",
-//     "body": [
-//         "uni.loadFontFace({",
-//             "\tfamily: 'Bitstream Vera Serif Bold',",
-//             "\tsource: 'url()',",
-//             "\tsuccess() {",
-//                 "\t\tconsole.log('success')",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-动态加载字体"
-// },
-// "uniapp-函数用于获取当前页面栈的实例": {
-//     "prefix": "getCurrentPages()",
-//     "body": [
-//         "getCurrentPages()//关于获取页面的官方文档https://uniapp.dcloud.io/api/window/window"
-//     ],
-//     "description": "uniapp-函数用于获取当前页面栈的实例"
-// },
-// "uniapp-保存文件到本地": {
-//     "prefix": "uni.saveFile()",
-//     "body": [
-//         "uni.saveFile({",
-//             "\ttempFilePath: tempFilePaths[0],",
-//             "\tsuccess: function (res) {",
-//                "\t\tvar savedFilePath = res.savedFilePath;",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-保存文件到本地"
-// },
-// "uniapp-获取本地已保存的文件列表": {
-//     "prefix": "uni.getSavedFileList()",
-//     "body": [
-//         "uni.getSavedFileList({",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log(res.fileList);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取本地已保存的文件列表"
-// },
-// "uniapp-获取本地文件的文件信息": {
-//     "prefix": "uni.getSavedFileInfo()",
-//     "body": [
-//         "uni.getSavedFileInfo({",
-//             "\tfilePath: 'unifile://somefile', //仅做示例用，非真正的文件路径",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log(res.size);",
-//                 "\t\tconsole.log(res.createTime);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-获取本地文件的文件信息"
-// },
-// "uniapp-删除本地存储的文件": {
-//     "prefix": "uni.removeSavedFile()",
-//     "body": [
-//         "uni.removeSavedFile({",
-//             "\tfilePath: res.fileList[0].filePath,",
-//             "\tcomplete: function (res) {",
-//                 "\t\tconsole.log(res);",
-//             "\t}",
-//         "});"
-//     ],
-//     "description": "uniapp-删除本地存储的文件"
-// },
-// "uniapp-获取文件信息": {
-//     "prefix": "uni.getFileInfo()",
-//     "body": [
-//         "uni.getFileInfo({",
-//             "\tfilePath: res.fileList[0].filePath,",
-//         "});"
-//     ],
-//     "description": "uniapp-获取文件信息"
-// },
-// "uniapp-新开页面打开文档,支持格式：doc, xls, ppt, pdf, docx, xlsx, pptx。": {
-//     "prefix": "openDocument()",
-//     "body": [
-//         "openDocument({",
-//             "\tfilePath: filePath,",
-//             "\tsuccess: function (res) {",
-//                 "\t\tconsole.log('打开文档成功');",
-//             "\t})",
-//         "});"
-//     ],
-//     "description": "uniapp-新开页面打开文档"
-// }
 
+
+  // 窗口 window
+  "uni.onWindowResize": {
+    "prefix": "uni.onWindowResize",
+    "body": [
+      "uni.onWindowResize((res) => {",
+      "\tconsole.log('变化后的窗口宽度=' + res.size.windowWidth)",
+      "\tconsole.log('变化后的窗口高度=' + res.size.windowHeight)",
+      "\t$0",
+      "})"
+    ],
+    "description": "uni.onWindowResize"
+  },
+  "uni.offWindowResize": {
+    "prefix": "uni.offWindowResize",
+    "body": [
+      "uni.offWindowResize(() => {",
+      "\t$0",
+      "})"
+    ],
+    "description": "uni.offWindowResize"
+  },
+  "uni.pageScrollTo": {
+    "prefix": "uni.pageScrollTo",
+    "body": [
+      "uni.pageScrollTo({",
+      "\tscrollTop: ${1:0},",
+      "\tduration: ${2:300}",
+      "})"
+    ],
+    "description": "uni.pageScrollTo"
+  },
 
   // 其他
-  "uni globalData": {
+  "uniapp globalData": {
     "prefix": "uni:globalData",
     "body": [
       "getApp().globalData."
     ],
     "description": "uni:globalData"
   },
+  "uniapp getCurrentPages": {
+    "prefix": "getCurrentPages",
+    "body": [
+      "getCurrentPages()"
+    ],
+    "description": "getCurrentPages"
+  },
+  "uni.createAnimation": {
+    "prefix": "uni.createAnimation",
+    "body": [
+      "let animation = uni.createAnimation({",
+      "\ttransformOrigin: '${1:50% 50%}',",
+      "\tduration: ${2:1000},",
+      "\ttimingFunction: '${3:ease}',",
+      "\tdelay: ${4:0}",
+      "})"
+    ],
+    "description": "uni.createAnimation"
+  },
+  "uni.loadFontFace": {
+    "prefix": "uni.loadFontFace",
+    "body": [
+      "uni.loadFontFace({",
+      "\tfamily: '${1:Serif Bold}',",
+      "\tsource: 'url($2)',",
+      "\tsuccess() {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ],
+    "description": "uni.loadFontFace"
+  },
+
 }
