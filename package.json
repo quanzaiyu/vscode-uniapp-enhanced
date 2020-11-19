@@ -3,7 +3,7 @@
   "displayName": "Uniapp Enhanced",
   "description": "Uniapp snippets for VSCode and verify schemas",
   "publisher": "quanzaiyu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.51.0"
@@ -95,7 +95,7 @@
     ]
   },
   "scripts": {
-    "push": "git push origin master && git push coding master",
+    "push": "node push.js",
     "build": "vsce package -o vscode-uniapp-enhanced.vsix",
     "ext": "yarn build && code --install-extension vscode-uniapp-enhanced.vsix",
     "publish": "vsce publish",
