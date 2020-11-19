@@ -40,17 +40,7 @@
     "body": "<scroll-view scroll-${1:x}=\"$2\">$0</scroll-view>",
     "description": "scroll-view"
   },
-  "swiper": {
-    "prefix": "swiper",
-    "body": [
-      "<swiper class=\"swiper\" :indicator-dots=\"$1\" :autoplay=\"${2:true}\" :interval=\"$3\" :duration=\"$4\">",
-      "\t<swiper-item>",
-      "\t\t<view class=\"swiper-item uni-bg-red\">$0</view>",
-      "\t</swiper-item>",
-      "</swiper>"
-    ],
-    "description": "swiper"
-  },
+
   "movable-area": {
     "prefix": "movable-area",
     "body": [
@@ -218,5 +208,463 @@
     "prefix": "map",
     "body": "<map longitude=\"$1\" latitude=\"$2\"></map>",
     "description": "map"
-  }
+  },
+
+
+  "uSwiper": {
+    "body": [
+      "<swiper class=\"swiper\" :indicator-dots=\"$1\" :autoplay=\"${2:true}\" :interval=\"$3\" :duration=\"$4\">",
+      "\t<swiper-item>",
+      "\t\t<view class=\"swiper-item uni-bg-red\" v-for=\"$5\" :key=\"$6\">$0</view>",
+      "\t</swiper-item>",
+      "</swiper>"
+    ],
+    "prefix": "uswiper"
+  },
+  "uGrid": {
+    "body": [
+      "<uni-grid :column=\"$1\">",
+      "\t<uni-grid-item v-for=\"$2\" :key=\"$3\">$4</uni-grid-item>",
+      "</uni-grid>"
+    ],
+    "prefix": "ugrid"
+  },
+  "uList": {
+    "body": [
+      "<uni-list>",
+      "\t<uni-list-item v-for=\"$1\" :key=\"$2\" title=\"$3\" note=\"$4\"></uni-list-item>",
+      "</uni-list>"
+    ],
+    "prefix": "ulist"
+  },
+  "uCheckbox": {
+    "body": [
+      "<label>",
+      "\t<checkbox :value=\"$1\" /><text>$0</text>",
+      "</label>"
+    ],
+    "prefix": "ucheckbox"
+  },
+  "uCheckboxGroup": {
+    "body": [
+      "<checkbox-group name=\"$1\">",
+      "\t<label>",
+      "\t\t<checkbox :value=\"$2\" /><text>$0</text>",
+      "\t</label>",
+      "</checkbox-group>"
+    ],
+    "prefix": "ucheckboxgroup"
+  },
+  "uRadio": {
+    "body": [
+      "<label class=\"radio\">",
+      "\t<radio value=\"$1\" /><text>$0</text>",
+      "</label>"
+    ],
+    "prefix": "uradio"
+  },
+  "uRadioGroup": {
+    "body": [
+      "<radio-group name=\"$1\">",
+      "\t<label>",
+      "\t\t<radio :value=\"$2\" /><text>$3</text>",
+      "\t</label>",
+      "\t<label>",
+      "\t\t<radio :value=\"$4\" /><text>$5</text>",
+      "\t</label>",
+      "</radio-group>"
+    ],
+    "prefix": "uradiogroup",
+    "scope": "source.vue.html"
+  },
+  "uSwitch": {
+      "body": [
+          "<switch checked=\"true\" @change=\"$1\" />"
+      ],
+      "prefix": "uswitch"
+  },
+  "uButton": {
+      "body": [
+          "<button type=\"default\">$1</button>"
+      ],
+      "prefix": "ubutton"
+  },
+  "uSlider": {
+      "body": [
+          "<slider @change=\"$1\"/>"
+      ],
+      "prefix": "uslider"
+  },
+  "uTemplate": {
+      "body": [
+          "<template>",
+          "\t<view>$0</view>",
+          "</template>"
+      ],
+      "prefix": "utemplate"
+  },
+  "uView": {
+      "body": [
+          "<view class=\"$1\">$0</view>"
+      ],
+      "prefix": "uview"
+  },
+  "uScrollView": {
+      "body": [
+          "<scroll-view scroll-y=\"true\" $1>",
+          "\t<view>$0</view>",
+          "</scroll-view>"
+      ],
+      "prefix": "uscrollview"
+  },
+  "uImage": {
+      "body": [
+          "<image src=\"$1\" mode=\"$2\"></image>"
+      ],
+      "prefix": "uimage"
+  },
+  "uInput": {
+      "body": [
+          "<input type=\"text\" value=\"$0\" />"
+      ],
+      "prefix": "uinput"
+  },
+  "uTextarea": {
+      "body": [
+          "<textarea value=\"$1\" placeholder=\"$0\" />"
+      ],
+      "prefix": "utextarea"
+  },
+  "uPicker": {
+      "body": [
+          "<picker mode=\"$1\" :range=\"$2\" @change=\"$3\">",
+          "\t<view>{{$0}}</view>",
+          "</picker>"
+      ],
+      "prefix": "upicker"
+  },
+  "uForm": {
+      "body": [
+          "<form @submit=\"\" @reset=\"\">",
+          "\t$1",
+          "\t<button form-type=\"submit\">Submit</button>",
+          "\t<button form-type=\"reset\">Reset</button>",
+          "</form>"
+      ],
+      "prefix": "uform"
+  },
+  "uText": {
+      "body": [
+          "<text>$0</text>"
+      ],
+      "prefix": "utext"
+  },
+  "uRichText": {
+      "body": [
+          "<rich-text :nodes=\"$1\"></rich-text>"
+      ],
+      "prefix": "urichtext"
+  },
+  "uProgress": {
+      "body": [
+          "<progress percent=\"$1\" show-info$0 />"
+      ],
+      "prefix": "uprogress",
+      "scope": "source.vue.html"
+  },
+  "uDateformat": {
+      "body": [
+          "<uni-dateformat date=\"$1\" />"
+      ],
+      "prefix": "udateformat",
+      "scope": "source.vue.html"
+  },
+  "uPickerView": {
+      "body": [
+          "<picker-view indicator-style=\"height: 50px;\" :value=\"value$1\" @change=\"bindChange\">",
+          "\t<picker-view-column>",
+          "\t\t$0",
+          "\t</picker-view-column>",
+          "\t<picker-view-column>",
+          "\t\t$2",
+          "\t</picker-view-column>",
+          "\t<picker-view-column>",
+          "\t\t",
+          "\t</picker-view-column>",
+          "</picker-view>"
+      ],
+      "prefix": "upickerview"
+  },
+  "uWebView": {
+      "body": [
+          "<web-view src=\"$1\"></web-view>"
+      ],
+      "prefix": "uwebview"
+  },
+  "uMap": {
+      "body": [
+          "<map :latitude=\"$1\" :longitude=\"$0\"></map>"
+      ],
+      "prefix": "umap"
+  },
+  "uVideo": {
+      "body": [
+          "<video src=\"$1\" controls></video>"
+      ],
+      "prefix": "uvideo"
+  },
+  "uAudio": {
+      "body": [
+          "<audio :src=\"$1\" :poster=\"$0\" :name=\"$2\" :author=\"$3\" :action=\"$4\" controls></audio>"
+      ],
+      "prefix": "uaudio"
+  },
+  "uNavigator": {
+      "body": [
+          "<navigator url=\"$1\">$0</navigator>"
+      ],
+      "prefix": "unavigator"
+  },
+  "uEditor": {
+      "body": [
+          "<editor placeholder=\"$1\"></editor>"
+      ],
+      "prefix": "uEditor"
+  },
+  "uBadge": {
+      "body": [
+          "<uni-badge text=\"$1\" type=\"$2\"></uni-badge>"
+      ],
+      "prefix": "ubadge"
+  },
+  "uTag": {
+      "body": [
+          "<uni-tag text=\"$1\" type=\"$2\"></uni-tag>"
+      ],
+      "prefix": "utag"
+  },
+  "uNumberBox": {
+      "body": [
+          "<uni-number-box @change=\"$1\"></uni-number-box>"
+      ],
+      "prefix": "unumberbox"
+  },
+  "uIcons": {
+      "body": [
+          "<uni-icons type=\"$1\"></uni-icons>"
+      ],
+      "prefix": "uicons"
+  },
+  "uIndexedList": {
+      "body": [
+          "<uni-indexed-list :options=\"$1\" :showSelect=\"$1\" @click=\"$1\"></uni-indexed-list>"
+      ],
+      "prefix": "uindexedlist"
+  },
+  "uLoadMore": {
+      "body": [
+          "<uni-load-more :status=\"$1\"></uni-load-more>"
+      ],
+      "prefix": "uloadmore"
+  },
+  "uNavBar": {
+      "body": [
+          "<uni-nav-bar left-icon=\"back\" left-text=\"返回\" right-text=\"菜单\" title=\"标题$1\"></uni-nav-bar>"
+      ],
+      "prefix": "unavbar"
+  },
+  "uPopup": {
+      "body": [
+          "<uni-popup type=\"middle$1\"></uni-popup>"
+      ],
+      "prefix": "upopup"
+  },
+  "uDrawer": {
+      "body": [
+          "<uni-drawer :visible=\"$1\">",
+          "\t<view style=\"padding:30rpx;\">",
+          "\t\t$2",
+          "\t</view>",
+          "</uni-drawer>"
+      ],
+      "prefix": "udrawer"
+  },
+  "uFab": {
+      "body": [
+          "<uni-fab @fabClick=\"$6\"></uni-fab>"
+      ],
+      "prefix": "ufab"
+  },
+  "uFav": {
+      "body": [
+          "<uni-fav :checked=\"$1\" @click=\"$2\"></uni-fav>"
+      ],
+      "prefix": "ufav"
+  },
+  "uGoodsNav": {
+      "body": [
+          "<uni-goods-nav :fill=\"$1\" :options=\"$2\" :button-group=\"$3\" @click=\"$4\" @buttonClick=\"$5\" />"
+      ],
+      "prefix": "ugoodsnav"
+  },
+  "uSegmentedControl": {
+      "body": [
+          "<uni-segmented-control :current=\"current$1\" :values=\"$0\" @clickItem=\"$2\"></uni-segmented-control>",
+          "<view class=\"content\">",
+          "\t<view v-show=\"current === 0\">",
+          "\t\t选项卡1的内容",
+          "\t</view>",
+          "\t<view v-show=\"current === 1\">",
+          "\t\t选项卡2的内容",
+          "\t</view>",
+          "\t<view v-show=\"current === 2\">",
+          "\t\t选项卡3的内容",
+          "\t</view>",
+          "</view>"
+      ],
+      "prefix": "usegmentedcontrol"
+  },
+  "uCountDown": {
+      "body": [
+          "<uni-countdown color=\"$1\" background-color=\"$2\" :day=\"$3\" :hour=\"$4\" :minute=\"$5\" :second=\"$6\"></uni-countdown>"
+      ],
+      "prefix": "ucountdown"
+  },
+  "uCard": {
+      "body": [
+          "<uni-card title=\"标题文字\" thumbnail=\"$1\" extra=\"额外信息$2\" note=\"Tips$3\">",
+          "\t内容主体，可自定义内容及样式$4",
+          "</uni-card>"
+      ],
+      "prefix": "ucard"
+  },
+  "uSteps": {
+      "body": [
+          "<uni-steps :options=\"$1\" :active=\"0$2\"></uni-steps>"
+      ],
+      "prefix": "usteps"
+  },
+  "uCalendar": {
+      "body": [
+          "<uni-calendar lunar=\"\" @change=\"$1\"></uni-calendar>"
+      ],
+      "prefix": "ucalendar"
+  },
+  "uCollapse": {
+      "body": [
+          "<uni-collapse>",
+          "\t<uni-collapse-item title=\"$2\">",
+          "\t\t内容$3",
+          "\t</uni-collapse-item>",
+          "</uni-collapse>"
+      ],
+      "prefix": "ucollapse"
+  },
+  "uNoticeBar": {
+      "body": [
+          "<uni-notice-bar single=\"$1\" text=\"$2\"></uni-notice-bar>"
+      ],
+      "prefix": "unoticebar"
+  },
+  "uPagination": {
+      "body": [
+          "<uni-pagination title=\"$1\" show-icon=\"$2\" total=\"$3\" current=\"$4\"></uni-pagination>"
+      ],
+      "prefix": "upagination"
+  },
+  "uRate": {
+      "body": [
+          "<uni-rate value=\"$1\"></uni-rate>"
+      ],
+      "prefix": "uRate"
+  },
+  "uSearchBar": {
+      "body": [
+          "<uni-search-bar @confirm=\"$1\" @input=\"$2\" />"
+      ],
+      "prefix": "usearchbar"
+  },
+  "uSwipeAction": {
+      "body": [
+          "<uni-swipe-action>",
+          "\t<uni-swipe-action-item :options=\"$1\" @click=\"$2\"></uni-swipe-action-item>",
+          "</uni-swipe-action>"
+      ],
+      "prefix": "uswipeaction"
+  },
+  "uSwiperDot": {
+      "body": [
+          "<uni-swiper-dot :info=\"$1\" :current=\"$2\" field=\"$3\" :mode=\"$4\"></uni-swiper-dot>"
+      ],
+      "prefix": "uswiperdot"
+  },
+  "uCombox": {
+      "body": [
+          "<uni-combox label=\"$1\" :candidates=\"$2\" placeholder=\"$3\" v-model=\"$4\"></uni-combox>"
+      ],
+      "prefix": "ucombox"
+  },
+  "uTitle": {
+      "body": [
+          "<uni-title title=\"$1\"></uni-title>"
+      ],
+      "prefix": "utitle"
+  },
+  "uTransition": {
+      "body": [
+          "<uni-transition :mode-class=\"$1\" :show=\"$2\" />"
+      ],
+      "prefix": "utransition"
+  },
+  "uForms": {
+      "body": [
+          "<uni-forms ref=\"form\" :form-rules=\"\" @submit=\"\" @reset=\"\" @validate=\"\">",
+          "\t<uni-field label=\"姓名\" name=\"name\" v-model=\"\" placeholder=\"\" />",
+          "\t$1",
+          "\t<button form-type=\"submit\">Submit</button>",
+          "\t<button form-type=\"reset\">Reset</button>",
+          "</uni-forms>"
+      ],
+      "prefix": "uforms",
+      "scope": "source.vue.html"
+  },
+  "uField": {
+      "body": [
+          "<uni-field label=\"$1\" name=\"$2\" v-model=\"$3\" placeholder=\"$4\" />"
+      ],
+      "prefix": "ufield",
+      "scope": "source.vue.html"
+  },
+  "uGroup": {
+      "body": [
+          "<uni-group title=\"$1\" margin-top=\"$2\">",
+          "\t内容主体，可自定义内容及样式$3",
+          "</uni-group>"
+      ],
+      "prefix": "ugroup",
+      "scope": "source.vue.html"
+  },
+  "uSection": {
+      "body": [
+          "<uni-section title=\"$1\" sub-title=\"$2\" type=\"$3\">",
+          "\t内容主体，可自定义内容及样式$4",
+          "</uni-section>"
+      ],
+      "prefix": "usection",
+      "scope": "source.vue.html"
+  },
+  "uLink": {
+      "body": [
+          "<uni-link href=\"$1\" text=\"$2\">$3</uni-link>"
+      ],
+      "prefix": "ulink",
+      "scope": "source.vue.html"
+  },
+  "uniClientdbComponent": {
+    "body": [
+      "<uni-clientdb v-slot:default=\"{data, loading, error, options}\" collection=\"$0\"></uni-clientdb>"
+    ],
+    "prefix": "udb",
+    "scope": "source.vue.html"
+  },
 }
